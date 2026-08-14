@@ -5,6 +5,7 @@ import ProductSequence from './components/ProductSequence';
 import Hero from './components/Hero';
 import ScentNotes from './components/ScentNotes';
 import ProductDetails from './components/ProductDetails';
+import ProductGallery from './components/ProductGallery';
 import Pricing from './components/Pricing';
 import Testimonials from './components/Testimonials';
 import FinalCTA from './components/FinalCTA';
@@ -48,6 +49,7 @@ function App() {
             <ScentNotes />
             {/* Reveal section removed — was causing ghost "CRAFTED TO" text between sections */}
             <ProductDetails />
+            <ProductGallery />
             <Pricing onBuyClick={(qty) => openCheckout(qty)} />
             <Testimonials />
             <FinalCTA onBuyClick={() => openCheckout(1)} />
