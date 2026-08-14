@@ -10,6 +10,7 @@ interface ProductSequenceProps {
 
 const ProductSequence: React.FC<ProductSequenceProps> = ({ images }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [vh, setVh] = React.useState(window.innerHeight);
 
   const imagesRef = useRef(images);
   
@@ -17,6 +18,20 @@ const ProductSequence: React.FC<ProductSequenceProps> = ({ images }) => {
   useEffect(() => {
     imagesRef.current = images;
   }, [images]);
+
+  useEffect(() => {
+    let lastWidth = window.innerWidth;
+    const handleResize = () => {
+      // Only update container height if the width changes (orientation flip or screen resize)
+      // Mobile address bar collapsing only changes height, so this completely prevents sudden zoom shifts
+      if (window.innerWidth !== lastWidth) {
+        lastWidth = window.innerWidth;
+        setVh(window.innerHeight);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     if (!canvasRef.current || imagesRef.current.length === 0) return;
@@ -60,7 +75,10 @@ const ProductSequence: React.FC<ProductSequenceProps> = ({ images }) => {
   }, []); 
 
   return (
-    <div className="fixed inset-0 z-0 w-full h-full pointer-events-none bg-[#020C17]">
+    <div 
+      className="fixed top-0 left-0 w-full z-0 pointer-events-none bg-[#020C17]"
+      style={{ height: `${vh}px` }}
+    >
       <canvas
         ref={canvasRef}
         className="w-full h-full object-cover"

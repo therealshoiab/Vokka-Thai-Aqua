@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useMagnetic } from '../hooks/useMagnetic';
 import { ShoppingCart } from 'lucide-react';
+import { splitTextReveal } from '../utils/animations';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,26 +13,36 @@ interface FinalCTAProps {
 
 const FinalCTA: React.FC<FinalCTAProps> = ({ onBuyClick }) => {
   const containerRef = useRef<HTMLElement>(null);
-  const innerRef = useRef<HTMLDivElement>(null);
+  const title1Ref = useRef<HTMLHeadingElement>(null);
+  const title2Ref = useRef<HTMLHeadingElement>(null);
+  const eyebrowRef = useRef<HTMLParagraphElement>(null);
   const btnRef = useMagnetic() as React.RefObject<HTMLButtonElement>;
 
   useEffect(() => {
-    if (!containerRef.current || !innerRef.current) return;
+    if (!containerRef.current) return;
 
-    // Simple, reliable reveal — no SplitType on mobile
-    const children = Array.from(innerRef.current.children);
-    gsap.set(children, { opacity: 0, y: 50 });
+    gsap.set([eyebrowRef.current, btnRef.current], { opacity: 0, y: 30 });
 
     ScrollTrigger.create({
       trigger: containerRef.current,
-      start: 'top 85%',
+      start: 'top 80%',
       onEnter: () => {
-        gsap.to(children, {
+        // Pop out first title
+        if (title1Ref.current) {
+          splitTextReveal(title1Ref.current, { duration: 0.8 });
+        }
+        // Pop out second title slightly staggered
+        if (title2Ref.current) {
+          splitTextReveal(title2Ref.current, { duration: 0.8, delay: 0.25 });
+        }
+        // Reveal CTA buttons and details
+        gsap.to([eyebrowRef.current, btnRef.current], {
           opacity: 1,
           y: 0,
-          duration: 0.9,
+          duration: 0.8,
           stagger: 0.15,
           ease: 'power3.out',
+          delay: 0.5,
         });
       },
       once: true,
@@ -43,19 +54,19 @@ const FinalCTA: React.FC<FinalCTAProps> = ({ onBuyClick }) => {
       ref={containerRef}
       className="min-h-[60vh] w-full flex flex-col items-center justify-center text-white relative z-20 bg-gradient-to-t from-[#050B14] via-[#050B14]/60 to-transparent pointer-events-auto border-t border-white/5 py-24 px-6"
     >
-      <div ref={innerRef} className="text-center z-10 w-full max-w-4xl mx-auto">
+      <div className="text-center z-10 w-full max-w-4xl mx-auto">
         {/* Gold divider */}
         <div className="w-16 h-[1px] bg-[#D4AF37] mx-auto mb-8"></div>
 
-        {/* Main headline - no SplitType, just CSS reveal */}
-        <h2 className="font-serif text-[clamp(2.5rem,8vw,5.5rem)] font-bold tracking-wider leading-tight text-white text-shadow-premium">
+        {/* Main headline - splits and pops out */}
+        <h2 ref={title1Ref} className="invisible font-serif text-[clamp(2.5rem,8vw,5.5rem)] font-bold tracking-wider leading-tight text-white text-shadow-premium">
           MAKE THEM
         </h2>
-        <h2 className="font-serif text-[clamp(2rem,6vw,4rem)] font-bold tracking-wider leading-tight mb-6 text-[#D4AF37] text-shadow-premium">
+        <h2 ref={title2Ref} className="invisible font-serif text-[clamp(2rem,6vw,4rem)] font-bold tracking-wider leading-tight mb-6 text-[#D4AF37] text-shadow-premium">
           REMEMBER YOU.
         </h2>
 
-        <p className="text-[10px] md:text-xs tracking-[0.4em] text-[#D4AF37]/70 mb-10 font-bold uppercase">
+        <p ref={eyebrowRef} className="text-[10px] md:text-xs tracking-[0.4em] text-[#D4AF37] mb-10 font-bold uppercase">
           ✦ VÖKKA THAI AQUA ✦
         </p>
 
