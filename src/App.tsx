@@ -4,13 +4,10 @@ import Preloader from './components/Preloader';
 import Navbar from './components/Navbar';
 import ProductSequence from './components/ProductSequence';
 import Hero from './components/Hero';
-import Experience from './components/Experience';
 import ScentNotes from './components/ScentNotes';
 import Reveal from './components/Reveal';
-import Story from './components/Story';
-import ProductDetails from './components/ProductDetails';
-import Testimonials from './components/Testimonials';
 import Purchase from './components/Purchase';
+import Testimonials from './components/Testimonials';
 import FinalCTA from './components/FinalCTA';
 import Footer from './components/Footer';
 import gsap from 'gsap';
@@ -40,13 +37,10 @@ function App() {
         
         <div className="relative z-10 w-full overflow-x-hidden">
           <Hero />
-          <Experience />
           <ScentNotes />
           <Reveal />
-          <Story />
-          <ProductDetails />
-          <Testimonials />
           <Purchase />
+          <Testimonials />
           <FinalCTA />
           <Footer />
         </div>

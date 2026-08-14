@@ -1,40 +1,27 @@
 import React from 'react';
-
-const REVIEWS = [
-  "Fresh, elegant and incredibly easy to wear.",
-  "One of those fragrances people actually ask about.",
-  "Beautiful bottle. Even better fragrance.",
-  "The aquatic notes are perfectly balanced.",
-  "My new daily signature scent. Simply stunning.",
-  "Lasts all day without being overpowering.",
-  "A masterpiece of modern perfumery.",
-  "Gets compliments everywhere I go.",
-  "Crisp, clean, and undeniably luxurious.",
-  "The presentation is just as good as the scent.",
-  "Exceeded all my expectations. 10/10.",
-  "Perfect for both office wear and date nights.",
-  "A refreshing take on aquatic fragrances.",
-  "The bergamot opening is absolutely addictive.",
-  "Worth every penny. Pure luxury in a bottle."
-];
+import { Star } from 'lucide-react';
 
 const Testimonials: React.FC = () => {
-  // Double the reviews for seamless infinite scrolling
-  const scrollItems = [...REVIEWS, ...REVIEWS];
+  const reviews = [
+    { text: "Fresh, sophisticated and incredibly easy to wear." },
+    { text: "The kind of fragrance people ask about." },
+    { text: "My new daily signature." }
+  ];
 
   return (
-    <section className="py-32 w-full bg-[#01060B] text-white z-20 relative overflow-hidden">
-      <div className="max-w-6xl mx-auto px-6 md:px-12 mb-20">
-        <h2 className="font-serif text-3xl md:text-5xl text-center">THE SCENT SPEAKS FOR ITSELF.</h2>
-      </div>
-      
-      <div className="flex overflow-hidden relative w-full">
-        <div className="flex w-max animate-marquee gap-8 px-4">
-          {scrollItems.map((review, idx) => (
-            <div key={idx} className="flex flex-col items-center justify-center text-center w-80 bg-[#020C17]/80 border border-white/5 p-8 rounded-xl shrink-0">
-              <div className="text-[#D4AF37] tracking-widest text-lg mb-6">★★★★★</div>
-              <p className="font-light text-white/90 text-base italic mb-6">"{review}"</p>
-              <p className="text-xs tracking-[0.2em] text-[#0089A7] mt-auto">— Verified Customer</p>
+    <section className="py-20 w-full bg-[#020C17] text-white overflow-hidden relative z-20">
+      <div className="max-w-5xl mx-auto px-6 md:px-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+          {reviews.map((review, i) => (
+            <div key={i} className="flex flex-col items-center p-6 bg-white/5 rounded-xl border border-white/10">
+              <div className="flex gap-1 mb-4 text-[#D4AF37]">
+                <Star size={12} fill="currentColor" />
+                <Star size={12} fill="currentColor" />
+                <Star size={12} fill="currentColor" />
+                <Star size={12} fill="currentColor" />
+                <Star size={12} fill="currentColor" />
+              </div>
+              <p className="font-serif text-lg md:text-xl text-white/90 italic">"{review.text}"</p>
             </div>
           ))}
         </div>

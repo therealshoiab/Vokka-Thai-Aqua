@@ -2,19 +2,14 @@ import React from 'react';
 
 const FinalCTA: React.FC = () => {
   return (
-    <section className="h-[80vh] w-full flex flex-col items-center justify-center text-center px-6 text-white relative z-20 bg-[#020C17]">
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent pointer-events-none z-[-1]"></div>
-      
-      <h2 className="font-serif text-5xl md:text-7xl lg:text-8xl mb-8 leading-tight">
-        MAKE THEM<br />REMEMBER YOU.
-      </h2>
-      <p className="text-[#0089A7] font-light text-xl tracking-widest mb-16">
-        Discover Thai Aqua by VÖKKA.
-      </p>
-      
-      <button className="bg-white text-[#020C17] hover:bg-[#1FDEC3] transition-colors py-5 px-12 tracking-widest text-sm font-medium rounded-sm">
-        SHOP THAI AQUA
-      </button>
+    <section className="h-[70vh] min-h-[500px] w-full flex flex-col items-center justify-center text-white relative z-20 bg-gradient-to-t from-[#01060B] to-transparent pointer-events-auto border-t border-white/5">
+      <div className="text-center z-10 px-6">
+        <h2 className="font-serif text-5xl md:text-7xl mb-4 tracking-wide drop-shadow-2xl">MAKE THEM<br/>REMEMBER YOU.</h2>
+        <p className="text-xs tracking-[0.4em] text-[#1FDEC3] mb-10 font-medium">VÖKKA THAI AQUA</p>
+        <button className="bg-white text-[#020C17] hover:bg-[#1FDEC3] transition-colors py-4 px-12 tracking-widest text-sm font-medium rounded-sm shadow-xl hover:shadow-[#1FDEC3]/20">
+          SHOP NOW
+        </button>
+      </div>
     </section>
   );
 };

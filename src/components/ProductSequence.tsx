@@ -45,7 +45,7 @@ const ProductSequence: React.FC<ProductSequenceProps> = ({ images }) => {
       trigger: "#main-scroll-container",
       start: "top top",
       end: "bottom bottom",
-      scrub: 1,
+      scrub: 0.5,
       animation: gsap.to(playhead, {
         frame: frameCount - 1,
         snap: "frame",
@@ -60,10 +60,10 @@ const ProductSequence: React.FC<ProductSequenceProps> = ({ images }) => {
   }, []); // Empty dependency array so ScrollTrigger is created only once
 
   return (
-    <div className="fixed inset-0 z-0 w-full h-full pointer-events-none">
+    <div className="fixed inset-0 z-0 w-full h-full pointer-events-none bg-[#020C17]">
       <canvas
         ref={canvasRef}
-        className="w-full h-full object-cover"
+        className="w-full h-full object-contain md:object-cover"
       />
     </div>
   );

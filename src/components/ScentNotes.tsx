@@ -28,37 +28,28 @@ const ScentNotes: React.FC = () => {
   }, []);
 
   return (
-    <section id="notes" ref={containerRef} className="h-[200vh] w-full relative text-white flex flex-col items-center md:items-start justify-center px-6 md:px-24 pointer-events-none">
-      <div className="sticky top-1/3 w-full max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center md:items-start gap-16 bg-[#020C17]/40 backdrop-blur-md p-8 md:p-12 rounded-xl border border-white/5 shadow-2xl">
-        <div className="md:w-1/3">
-          <h2 className="font-serif text-4xl md:text-5xl tracking-wide mb-4">THE SCENT</h2>
-          <p className="text-[#0089A7] font-light text-xl tracking-wide max-w-sm text-center md:text-left drop-shadow-lg">
-            A carefully balanced composition designed to evolve with you.
-          </p>
-        </div>
+    <section id="notes" ref={containerRef} className="h-[100vh] min-h-[600px] w-full relative text-white flex flex-col items-center justify-center px-6 md:px-12 pointer-events-none">
+      <div className="w-full max-w-4xl mx-auto flex flex-col items-center text-center bg-[#020C17]/40 backdrop-blur-md p-8 md:p-12 rounded-xl border border-white/5 shadow-2xl pointer-events-auto mt-16 md:mt-0">
+        <h2 className="font-serif text-4xl md:text-5xl tracking-wide mb-6">THE SCENT</h2>
+        
+        <p className="font-light text-base md:text-xl text-white/90 leading-relaxed max-w-2xl mb-12 drop-shadow-md">
+          A fresh aquatic composition created for effortless confidence, from the first spray to the final impression.
+        </p>
 
-        <div className="flex flex-col gap-12 md:w-1/3">
-          <div className="scent-note flex flex-col items-center md:items-start">
-            <h3 className="text-xs tracking-[0.3em] text-[#D4AF37] mb-4 border-b border-[#D4AF37]/30 pb-2">TOP NOTES</h3>
-            <ul className="space-y-2 font-serif text-2xl text-white text-center md:text-left drop-shadow-md">
-              <li>Bergamot</li>
-              <li>Pink Pepper</li>
-            </ul>
+        <div className="flex flex-col md:flex-row justify-between w-full gap-8">
+          <div className="scent-note flex flex-col items-center flex-1">
+            <h3 className="text-[10px] md:text-xs tracking-[0.3em] text-[#D4AF37] mb-2 md:mb-4 border-b border-[#D4AF37]/30 pb-2 w-full">TOP</h3>
+            <p className="font-serif text-base md:text-xl text-white drop-shadow-md">Bergamot · Pink Pepper</p>
           </div>
-          <div className="scent-note flex flex-col items-center md:items-start">
-            <h3 className="text-xs tracking-[0.3em] text-[#D4AF37] mb-4 border-b border-[#D4AF37]/30 pb-2">HEART NOTES</h3>
-            <ul className="space-y-2 font-serif text-2xl text-white text-center md:text-left drop-shadow-md">
-              <li>Jasmine</li>
-              <li>White Flowers</li>
-            </ul>
+          
+          <div className="scent-note flex flex-col items-center flex-1">
+            <h3 className="text-[10px] md:text-xs tracking-[0.3em] text-[#D4AF37] mb-2 md:mb-4 border-b border-[#D4AF37]/30 pb-2 w-full">HEART</h3>
+            <p className="font-serif text-base md:text-xl text-white drop-shadow-md">Jasmine · White Flowers</p>
           </div>
-          <div className="scent-note flex flex-col items-center md:items-start">
-            <h3 className="text-xs tracking-[0.3em] text-[#D4AF37] mb-4 border-b border-[#D4AF37]/30 pb-2">BASE NOTES</h3>
-            <ul className="space-y-2 font-serif text-2xl text-white text-center md:text-left drop-shadow-md">
-              <li>Amber</li>
-              <li>Musk</li>
-              <li>Woody Notes</li>
-            </ul>
+          
+          <div className="scent-note flex flex-col items-center flex-1">
+            <h3 className="text-[10px] md:text-xs tracking-[0.3em] text-[#D4AF37] mb-2 md:mb-4 border-b border-[#D4AF37]/30 pb-2 w-full">BASE</h3>
+            <p className="font-serif text-base md:text-xl text-white drop-shadow-md">Amber · Musk · Woody Notes</p>
           </div>
         </div>
       </div>
