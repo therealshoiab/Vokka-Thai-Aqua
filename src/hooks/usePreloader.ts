@@ -22,7 +22,10 @@ export const usePreloader = () => {
         img.src = `${baseUrl}frames/${frameNumber}.webp`;
         
         const handleComplete = () => {
-          if (!mounted) return;
+          if (!mounted) {
+            resolve();
+            return;
+          }
           loadedCount++;
           setProgress(Math.round((loadedCount / TOTAL_FRAMES) * 100));
           
@@ -38,13 +41,12 @@ export const usePreloader = () => {
         };
 
         img.onload = () => {
-          if (!mounted) return;
           images[index] = img;
           handleComplete();
         };
 
-        img.onerror = () => {
-          console.error(`Failed to load frame ${frameNumber}`);
+        img.onerror = (e) => {
+          console.error(`Failed to load frame ${frameNumber} at path ${img.src}`, e);
           handleComplete();
         };
       });
