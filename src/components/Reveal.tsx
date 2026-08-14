@@ -30,11 +30,11 @@ const Reveal: React.FC = () => {
   }, []);
 
   return (
-    <section ref={containerRef} id="details" className="h-[150vh] w-full relative text-white pointer-events-none">
-      <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center">
-        <div className="absolute top-1/4 text-center reveal-title bg-[#020C17]/40 backdrop-blur-sm px-8 md:px-12 py-6 md:py-8 rounded-xl border border-white/5 shadow-2xl">
-          <p className="text-[10px] md:text-xs tracking-[0.4em] text-[#1FDEC3] mb-4 drop-shadow-md">EVERY DETAIL MATTERS</p>
-          <h2 className="font-serif text-3xl md:text-6xl drop-shadow-xl">CRAFTED TO BE<br/>REMEMBERED.</h2>
+    <section ref={containerRef} id="details" className="h-[100vh] md:h-[150vh] w-full relative text-white pointer-events-none">
+      <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-start md:justify-center pt-24 md:pt-0">
+        <div className="absolute md:top-1/4 top-[15%] text-center reveal-title bg-[#020C17]/40 backdrop-blur-sm px-6 md:px-12 py-4 md:py-8 rounded-xl border border-white/5 shadow-2xl">
+          <p className="text-[10px] md:text-xs tracking-[0.4em] text-[#1FDEC3] mb-2 md:mb-4 drop-shadow-md">EVERY DETAIL MATTERS</p>
+          <h2 className="font-serif text-[clamp(1.5rem,6vw,3rem)] md:text-6xl drop-shadow-xl leading-tight">CRAFTED TO BE<br/>REMEMBERED.</h2>
         </div>
 
         <div className="absolute w-full h-full flex items-center justify-center">

@@ -18,28 +18,37 @@ const Hero: React.FC = () => {
   }, []);
 
   return (
-    <section id="hero" ref={containerRef} className="relative w-full h-[100vh] flex flex-col justify-center items-center text-center px-6 md:px-12 text-white pointer-events-none">
+    <section id="hero" ref={containerRef} className="relative w-full h-[100vh] flex flex-col justify-between py-24 px-6 md:px-12 text-white pointer-events-none z-10">
       
-      <div className="z-10 bg-[#020C17]/20 backdrop-blur-sm p-8 md:p-12 rounded-xl border border-white/5 shadow-2xl pointer-events-auto flex flex-col items-center">
-        <p ref={subtitleRef} className="opacity-0 translate-y-4 text-[#D4AF37] tracking-[0.4em] text-sm md:text-base font-medium mb-4 drop-shadow-md">VÖKKA</p>
+      {/* TOP SECTION: TITLE */}
+      <div className="w-full flex flex-col items-center mt-4 md:mt-12 pointer-events-auto">
+        <p ref={subtitleRef} className="opacity-0 translate-y-4 text-[#D4AF37] tracking-[0.4em] text-sm md:text-base font-medium mb-2 drop-shadow-md">VÖKKA</p>
         
-        <h1 ref={titleRef} className="opacity-0 translate-y-8 font-serif text-5xl md:text-7xl lg:text-8xl tracking-wider mb-2 drop-shadow-xl">
+        <h1 ref={titleRef} className="opacity-0 translate-y-8 font-serif text-[clamp(2.5rem,10vw,5rem)] md:text-7xl lg:text-8xl tracking-wider mb-2 drop-shadow-xl text-center leading-none">
           THAI AQUA
         </h1>
-        
-        <p ref={descRef} className="opacity-0 translate-y-4 text-white/90 text-sm md:text-base tracking-[0.2em] max-w-md drop-shadow-lg mb-8 uppercase">
-          EAU DE PARFUM <br/><span className="text-[#1FDEC3] lowercase italic font-serif">Fresh aquatic fragrance</span>
+      </div>
+
+      {/* MIDDLE SECTION: CLEAR SAFE ZONE FOR BOTTLE */}
+      <div className="flex-1 w-full min-h-[30vh]"></div>
+      
+      {/* BOTTOM SECTION: CTA */}
+      <div className="w-full flex flex-col items-center mb-8 md:mb-12 pointer-events-auto bg-[#020C17]/10 backdrop-blur-sm md:bg-transparent md:backdrop-blur-none p-4 rounded-xl border border-white/5 md:border-none">
+        <p ref={descRef} className="opacity-0 translate-y-4 text-white/90 text-[10px] md:text-sm tracking-[0.2em] md:tracking-[0.3em] max-w-md drop-shadow-lg mb-6 uppercase text-center leading-relaxed">
+          EAU DE PARFUM <br/>
+          <span className="text-[#1FDEC3] lowercase italic font-serif tracking-normal text-sm md:text-base">Fresh · Aquatic · Unisex</span>
         </p>
-        <a ref={ctaRef} href="#purchase" className="opacity-0 translate-y-4 inline-block bg-white text-[#020C17] hover:bg-[#1FDEC3] transition-colors py-4 px-10 tracking-widest text-sm font-medium rounded-sm pointer-events-auto">
+
+        <a ref={ctaRef} href="#purchase" className="opacity-0 translate-y-4 inline-block bg-white text-[#020C17] hover:bg-[#1FDEC3] transition-colors py-3 md:py-4 px-8 md:px-10 tracking-widest text-xs md:text-sm font-medium rounded-sm">
           SHOP NOW
         </a>
       </div>
       
-      <div className="absolute top-[85vh] left-1/2 -translate-x-1/2 md:left-12 md:-translate-x-0 flex flex-col items-center gap-4 animate-pulse pointer-events-none">
-        <span className="text-xs tracking-[0.2em] text-white/70">
+      <div className="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 md:gap-4 animate-pulse pointer-events-none">
+        <span className="text-[10px] md:text-xs tracking-[0.2em] text-white/70">
           SCROLL
         </span>
-        <div className="w-[1px] h-12 bg-gradient-to-b from-white/70 to-transparent"></div>
+        <div className="w-[1px] h-8 md:h-12 bg-gradient-to-b from-white/70 to-transparent"></div>
       </div>
     </section>
   );

@@ -14,9 +14,9 @@ const Navbar: React.FC = () => {
   }, []);
 
   return (
-    <nav className={`fixed top-0 left-0 w-full z-40 transition-all duration-500 ease-in-out ${isScrolled ? 'bg-[#020C17]/80 backdrop-blur-md py-4' : 'bg-transparent py-6'}`}>
-      <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
-        <div className="font-serif text-2xl tracking-widest text-white">VÖKKA</div>
+    <nav className={`fixed top-0 left-0 w-full z-40 transition-all duration-500 ease-in-out ${isScrolled ? 'bg-[#020C17]/80 backdrop-blur-md py-3 md:py-4' : 'bg-transparent py-4 md:py-6'}`}>
+      <div className="max-w-7xl mx-auto px-4 md:px-12 flex items-center justify-between">
+        <div className="font-serif text-lg md:text-2xl tracking-widest text-white">VÖKKA</div>
         
         <div className="hidden md:flex space-x-8 text-sm tracking-widest text-white/80">
           <a href="#fragrance" className="hover:text-white transition-colors">FRAGRANCE</a>
