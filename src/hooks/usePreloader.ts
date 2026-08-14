@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
-const TOTAL_FRAMES = 240;
-const INITIAL_FRAMES = 20;
+const TOTAL_FRAMES = 120; // Skip every other frame to cut load time by 50%
+const INITIAL_FRAMES = 15; // Minimal set of frames needed for instant rendering of the hero section
 
 export const usePreloader = () => {
   const [progress, setProgress] = useState(0);
@@ -16,7 +16,12 @@ export const usePreloader = () => {
     const loadFrame = (index: number) => {
       return new Promise<void>((resolve) => {
         const img = new Image();
-        const frameNumber = (index + 1).toString().padStart(4, '0');
+        
+        // Sample evenly from 240 frames down to 120
+        // index = 0 maps to 1, index = 119 maps to 240
+        const actualFrameIndex = Math.round((index / (TOTAL_FRAMES - 1)) * 239) + 1;
+        const frameNumber = actualFrameIndex.toString().padStart(4, '0');
+        
         // import.meta.env.BASE_URL handles GitHub Pages subdirectory correctly
         const baseUrl = import.meta.env.BASE_URL;
         img.src = `${baseUrl}frames/${frameNumber}.webp`;
@@ -53,13 +58,15 @@ export const usePreloader = () => {
     };
 
     const initLoad = async () => {
-      // Load initial frames sequentially to prioritize them
+      // Load initial frames in parallel for instant display
+      const initialPromises = [];
       for (let i = 0; i < INITIAL_FRAMES; i++) {
-        await loadFrame(i);
+        initialPromises.push(loadFrame(i));
       }
+      await Promise.all(initialPromises);
       
-      // Load the rest in chunks
-      const chunkSize = 10;
+      // Load the rest in larger parallel chunks to speed up overall loading
+      const chunkSize = 15;
       for (let i = INITIAL_FRAMES; i < TOTAL_FRAMES; i += chunkSize) {
         if (!mounted) break;
         const promises = [];
