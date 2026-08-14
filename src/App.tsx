@@ -10,6 +10,7 @@ import Pricing from './components/Pricing';
 import Testimonials from './components/Testimonials';
 import FinalCTA from './components/FinalCTA';
 import Footer from './components/Footer';
+import SmoothScroll from './components/SmoothScroll';
 import CheckoutModal from './components/CheckoutModal';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -31,27 +32,29 @@ function App() {
   const openCheckout = () => setIsCheckoutOpen(true);
 
   return (
-    <div className="min-h-screen text-white font-sans selection:bg-[#1FDEC3] selection:text-[#020C17] overflow-x-hidden">
-      {!isInitialLoaded && <Preloader progress={progress} />}
-      
-      <Navbar onShopClick={openCheckout} />
-      
-      <div id="main-scroll-container" className="relative w-full">
-        {isInitialLoaded && <ProductSequence images={loadedImages} />}
+    <SmoothScroll>
+      <div className="min-h-screen text-white font-sans selection:bg-[#1FDEC3] selection:text-[#020C17] overflow-x-hidden">
+        {!isInitialLoaded && <Preloader progress={progress} />}
         
-        <div className="relative z-10 w-full overflow-x-hidden">
-          <Hero onBuyClick={openCheckout} />
-          <ScentNotes />
-          <Reveal />
-          <Pricing onBuyClick={openCheckout} />
-          <Testimonials />
-          <FinalCTA onBuyClick={openCheckout} />
-          <Footer />
+        <Navbar onShopClick={openCheckout} />
+        
+        <div id="main-scroll-container" className="relative w-full">
+          {isInitialLoaded && <ProductSequence images={loadedImages} />}
+          
+          <div className="relative z-10 w-full overflow-x-hidden">
+            <Hero onBuyClick={openCheckout} />
+            <ScentNotes />
+            <Reveal />
+            <Pricing onBuyClick={openCheckout} />
+            <Testimonials />
+            <FinalCTA onBuyClick={openCheckout} />
+            <Footer />
+          </div>
         </div>
-      </div>
 
-      <CheckoutModal isOpen={isCheckoutOpen} onClose={() => setIsCheckoutOpen(false)} />
-    </div>
+        <CheckoutModal isOpen={isCheckoutOpen} onClose={() => setIsCheckoutOpen(false)} />
+      </div>
+    </SmoothScroll>
   );
 }
 

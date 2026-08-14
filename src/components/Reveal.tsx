@@ -1,66 +1,62 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { splitTextReveal } from '../utils/animations';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Reveal: React.FC = () => {
   const containerRef = useRef<HTMLElement>(null);
+  const text1Ref = useRef<HTMLHeadingElement>(null);
+  const text2Ref = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
-    if (!containerRef.current) return;
+    if (!containerRef.current || !text1Ref.current || !text2Ref.current) return;
+    
+    // Hide initially to prevent flash
+    gsap.set([text1Ref.current, text2Ref.current], { visibility: 'visible' });
 
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: containerRef.current,
-        start: "top top",
-        end: "bottom center",
-        scrub: 0.5,
+        start: "top center",
+        end: "+=150%", // Keep the longer scroll distance requested earlier
+        scrub: 1.5, // Smoother scrub for luxury feel
+        pin: true,
       }
     });
 
-    tl.fromTo('.reveal-title', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1 })
-      .to('.reveal-title', { opacity: 0, y: -30, duration: 0.5 }, "+=4") // Hold for a long time
-      .fromTo('.reveal-micro', { opacity: 0, filter: "blur(10px)", scale: 0.8 }, { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.8, stagger: 0.2 }, "-=2")
-      .to('.reveal-micro', { opacity: 0, duration: 0.5 }, "+=4");
+    // Reveal first line
+    tl.add(() => splitTextReveal(text1Ref.current!, { duration: 1.5, stagger: 0.08 }))
+      .to({}, { duration: 2 }) // hold
+      .to(text1Ref.current, { opacity: 0, y: -20, duration: 1, filter: 'blur(5px)' });
+
+    // Reveal second line
+    tl.add(() => splitTextReveal(text2Ref.current!, { duration: 1.5, stagger: 0.08 }))
+      .to({}, { duration: 3 }) // hold longer
+      .to(text2Ref.current, { opacity: 0, scale: 1.1, duration: 1.5, filter: 'blur(10px)' });
 
     return () => {
       tl.kill();
+      ScrollTrigger.getAll().forEach(st => {
+        if (st.trigger === containerRef.current) st.kill();
+      });
     };
   }, []);
 
   return (
-    <section ref={containerRef} id="details" className="h-[200vh] md:h-[300vh] w-full relative text-white pointer-events-none">
-      <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-start md:justify-center pt-24 md:pt-0">
-        {/* Adjusted top position to be higher up on mobile to avoid the gold cap */}
-        <div className="absolute md:top-1/4 top-[10%] text-center reveal-title bg-[#020C17]/40 backdrop-blur-sm px-6 md:px-12 py-4 md:py-8 rounded-xl border border-white/5 shadow-2xl">
-          <p className="text-[10px] md:text-xs tracking-[0.4em] text-[#1FDEC3] mb-2 md:mb-4 drop-shadow-md">EVERY DETAIL MATTERS</p>
-          <h2 className="font-serif text-[clamp(1.5rem,6vw,3rem)] md:text-6xl drop-shadow-xl leading-tight">CRAFTED TO BE<br/>REMEMBERED.</h2>
-        </div>
-
-        <div className="absolute w-full h-full flex items-center justify-center">
-          {/* Micro-copy positioned around the center (pushed to extreme edges on mobile) */}
-          <div className="absolute left-2 md:left-[15%] top-[40%] reveal-micro bg-[#020C17]/60 backdrop-blur-md px-4 md:px-6 py-2 md:py-3 rounded-full border border-white/10 shadow-lg">
-            <div className="text-[10px] md:text-xs tracking-[0.3em] text-white flex items-center gap-2 md:gap-4">
-              <span>PRECISION</span>
-              <div className="w-4 md:w-8 h-[1px] bg-white/50 hidden md:block"></div>
-            </div>
-          </div>
-          
-          <div className="absolute right-2 md:right-[15%] top-[55%] reveal-micro bg-[#020C17]/60 backdrop-blur-md px-4 md:px-6 py-2 md:py-3 rounded-full border border-white/10 shadow-lg">
-            <div className="text-[10px] md:text-xs tracking-[0.3em] text-[#D4AF37] flex items-center gap-2 md:gap-4 flex-row-reverse">
-              <span>CHARACTER</span>
-              <div className="w-4 md:w-8 h-[1px] bg-[#D4AF37]/50 hidden md:block"></div>
-            </div>
-          </div>
-          
-          <div className="absolute left-4 md:left-[20%] top-[70%] reveal-micro bg-[#020C17]/60 backdrop-blur-md px-4 md:px-6 py-2 md:py-3 rounded-full border border-white/10 shadow-lg">
-            <div className="text-[10px] md:text-xs tracking-[0.3em] text-white flex items-center gap-2 md:gap-4">
-              <span>CRAFT</span>
-              <div className="w-4 md:w-8 h-[1px] bg-white/50 hidden md:block"></div>
-            </div>
-          </div>
-        </div>
+    <section ref={containerRef} className="h-screen w-full flex items-center justify-center relative z-10 pointer-events-none px-4">
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#01060B]/60 to-transparent"></div>
+      
+      <div className="relative z-20 flex flex-col items-center justify-center text-center">
+        <h2 ref={text1Ref} className="invisible font-serif text-[clamp(2.5rem,8vw,5rem)] text-white tracking-widest drop-shadow-2xl absolute w-full max-w-4xl px-4">
+          EVERY DETAIL MATTERS.
+        </h2>
+        
+        <h2 ref={text2Ref} className="invisible font-serif text-[clamp(2.5rem,8vw,5rem)] text-white tracking-widest drop-shadow-2xl absolute w-full max-w-4xl px-4 leading-tight">
+          CRAFTED TO BE<br/>
+          <span className="text-[#D4AF37]">REMEMBERED.</span>
+        </h2>
       </div>
     </section>
   );

@@ -1,5 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import gsap from 'gsap';
+import { splitTextReveal } from '../utils/animations';
+import { useMagnetic } from '../hooks/useMagnetic';
 
 interface HeroProps {
   onBuyClick?: () => void;
@@ -10,15 +12,64 @@ const Hero: React.FC<HeroProps> = ({ onBuyClick }) => {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const descRef = useRef<HTMLParagraphElement>(null);
-  const ctaRef = useRef<HTMLButtonElement>(null);
+  
+  // Use magnetic hook for the CTA button
+  const ctaRef = useMagnetic() as React.RefObject<HTMLButtonElement>;
 
   useEffect(() => {
+    // Hide title text initially to prevent flash of unstyled content
+    if (titleRef.current) gsap.set(titleRef.current, { visibility: 'visible' });
+
     const tl = gsap.timeline();
     
-    tl.to(titleRef.current, { opacity: 1, y: 0, duration: 1, ease: 'power3.out', delay: 0.2 })
-      .to(subtitleRef.current, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, "-=0.6")
-      .to(descRef.current, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, "-=0.6")
-      .to(ctaRef.current, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, "-=0.4");
+    // Logo/Subtitle fades/scales in first
+    tl.to(subtitleRef.current, {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      duration: 1.5,
+      ease: "power3.out",
+      delay: 0.5
+    });
+    
+    // Headline splits by character and rises with blur-to-sharp transition
+    if (titleRef.current) {
+      // Small delay so it happens right after subtitle starts
+      setTimeout(() => {
+        splitTextReveal(titleRef.current!, { delay: 0.2, duration: 1.5 });
+      }, 500);
+      
+      // We add a dummy tween to the timeline just for timing purposes
+      tl.to({}, { duration: 1 }, "-=1");
+    }
+
+    // Then description and CTA
+    tl.to([descRef.current, ctaRef.current], {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      stagger: 0.2,
+      ease: "power3.out"
+    }, "-=0.5");
+
+    // Scroll-linked transition: shrink and fade as user scrolls past hero
+    const st = gsap.to(containerRef.current, {
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+      },
+      opacity: 0,
+      scale: 0.9,
+      y: 100,
+      ease: "power2.inOut"
+    });
+
+    return () => {
+      tl.kill();
+      st.kill();
+    };
   }, []);
 
   return (
@@ -26,37 +77,33 @@ const Hero: React.FC<HeroProps> = ({ onBuyClick }) => {
       
       {/* TOP SECTION: TITLE */}
       <div className="w-full flex flex-col items-center mt-0 md:mt-12 pointer-events-auto">
-        <p ref={subtitleRef} className="opacity-0 translate-y-4 text-[#D4AF37] tracking-[0.4em] text-sm md:text-base font-medium mb-2 drop-shadow-md">VÖKKA</p>
+        <p ref={subtitleRef} className="opacity-0 translate-y-4 scale-95 text-[#D4AF37] tracking-[0.4em] text-sm md:text-base font-medium mb-2 drop-shadow-md">VÖKKA</p>
         
-        <h1 ref={titleRef} className="opacity-0 translate-y-8 font-serif text-[clamp(2.5rem,10vw,5rem)] md:text-7xl lg:text-8xl tracking-wider mb-2 drop-shadow-xl text-center leading-none">
+        {/* Added invisible class initially to prevent unstyled text flash before SplitType runs */}
+        <h1 ref={titleRef} className="invisible font-serif text-[clamp(2.5rem,10vw,5rem)] md:text-7xl lg:text-8xl tracking-wider mb-2 drop-shadow-xl text-center leading-none">
           THAI AQUA
         </h1>
       </div>
-
-      {/* MIDDLE SECTION: CLEAR SAFE ZONE FOR BOTTLE */}
-      <div className="flex-1 w-full min-h-[30vh]"></div>
       
       {/* BOTTOM SECTION: CTA */}
-      <div className="w-full flex flex-col items-center mb-16 md:mb-12 pointer-events-auto bg-transparent md:bg-[#020C17]/10 md:backdrop-blur-sm p-4 rounded-xl md:border md:border-white/5">
-        <p ref={descRef} className="opacity-0 translate-y-4 text-white/90 text-[10px] md:text-sm tracking-[0.2em] md:tracking-[0.3em] max-w-md drop-shadow-lg mb-6 uppercase text-center leading-relaxed">
-          EAU DE PARFUM <br/>
+      <div className="w-full flex flex-col items-center pb-12">
+        <p ref={descRef} className="opacity-0 translate-y-4 text-center max-w-md text-white/80 text-sm md:text-base leading-relaxed tracking-wider drop-shadow-lg mb-8">
+          The essence of the ocean, distilled into a luxury fragrance. <br/>
           <span className="text-[#1FDEC3] lowercase italic font-serif tracking-normal text-sm md:text-base">Fresh · Aquatic · Unisex</span>
         </p>
 
         <button 
           ref={ctaRef}
           onClick={onBuyClick}
-          className="opacity-0 translate-y-4 mt-12 bg-white text-[#020C17] px-8 py-3 tracking-widest text-sm font-medium hover:bg-[#1FDEC3] transition-colors rounded-sm pointer-events-auto shadow-2xl"
+          className="opacity-0 translate-y-4 bg-white text-[#020C17] px-10 py-4 tracking-widest text-sm font-medium rounded-sm pointer-events-auto shadow-2xl transition-colors hover:bg-[#1FDEC3]"
         >
           SHOP NOW
         </button>
       </div>
       
       <div className="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 md:gap-4 animate-pulse pointer-events-none">
-        <span className="text-[10px] md:text-xs tracking-[0.2em] text-white/70">
-          SCROLL
-        </span>
-        <div className="w-[1px] h-8 md:h-12 bg-gradient-to-b from-white/70 to-transparent"></div>
+        <div className="w-[1px] h-12 md:h-16 bg-gradient-to-b from-white to-transparent"></div>
+        <span className="text-[8px] md:text-[10px] tracking-[0.3em] text-white/50 uppercase">Discover</span>
       </div>
     </section>
   );

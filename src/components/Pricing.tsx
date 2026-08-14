@@ -1,11 +1,31 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Check } from 'lucide-react';
+import gsap from 'gsap';
+import { splitTextReveal } from '../utils/animations';
 
 interface PricingProps {
-  onBuyClick: () => void;
+  onBuyClick?: () => void;
 }
 
 const Pricing: React.FC<PricingProps> = ({ onBuyClick }) => {
+  const containerRef = useRef<HTMLElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    if (!containerRef.current || !titleRef.current) return;
+    
+    gsap.set(titleRef.current, { visibility: 'visible' });
+
+    ScrollTrigger.create({
+      trigger: containerRef.current,
+      start: "top 80%",
+      onEnter: () => {
+        splitTextReveal(titleRef.current!, { duration: 1.2, stagger: 0.05 });
+      },
+      once: true
+    });
+  }, []);
+
   const plans = [
     {
       id: 'single',
@@ -54,12 +74,12 @@ const Pricing: React.FC<PricingProps> = ({ onBuyClick }) => {
   ];
 
   return (
-    <section id="pricing" className="py-24 w-full bg-[#020C17] text-white z-20 relative border-t border-white/5 pointer-events-auto">
+    <section id="pricing" ref={containerRef} className="py-24 w-full bg-[#020C17] text-white z-20 relative border-t border-white/5 pointer-events-auto">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         
         <div className="text-center max-w-3xl mx-auto mb-16">
           <p className="text-[#0089A7] tracking-[0.2em] text-xs font-medium uppercase mb-4">PURCHASE</p>
-          <h2 className="font-serif text-3xl md:text-5xl mb-6 tracking-wide drop-shadow-md text-white">CHOOSE YOUR COLLECTION</h2>
+          <h2 ref={titleRef} className="invisible font-serif text-3xl md:text-5xl mb-6 tracking-wide drop-shadow-md text-white">CHOOSE YOUR COLLECTION</h2>
           <p className="text-white/60 text-sm md:text-base leading-relaxed">
             VOKKA Thai Aqua 100 ml Unisex Luxury Long Lasting Aqua Perfume For Men And Women. Select the package that suits your lifestyle.
           </p>

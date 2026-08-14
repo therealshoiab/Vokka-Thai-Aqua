@@ -10,48 +10,71 @@ const ScentNotes: React.FC = () => {
   useEffect(() => {
     if (!containerRef.current) return;
     
-    gsap.fromTo('.scent-note', 
-      { opacity: 0, y: 30 },
-      { 
-        opacity: 1, 
-        y: 0, 
-        duration: 1, 
-        stagger: 0.3,
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top center",
-          end: "center center",
-          scrub: 1
+    const notes = gsap.utils.toArray('.scent-note');
+    notes.forEach((note: any, i: number) => {
+      // Alternate sliding from left and right
+      const xOffset = i % 2 === 0 ? -50 : 50;
+      
+      gsap.fromTo(note, 
+        { 
+          opacity: 0, 
+          x: xOffset,
+          scale: 0.95
+        }, 
+        {
+          scrollTrigger: {
+            trigger: note,
+            start: "top 85%",
+            toggleActions: "play none none reverse"
+          },
+          opacity: 1,
+          x: 0,
+          scale: 1,
+          duration: 1,
+          ease: "power3.out"
         }
-      }
-    );
+      );
+    });
   }, []);
 
   return (
-    <section id="notes" ref={containerRef} className="min-h-[100vh] w-full relative text-white flex flex-col items-center justify-end md:justify-center px-4 md:px-12 pointer-events-none pb-24 md:pb-0">
-      <div className="w-full max-w-4xl mx-auto flex flex-col items-center text-center bg-transparent md:bg-[#020C17]/40 md:backdrop-blur-md p-2 md:p-12 rounded-xl md:border md:border-white/5 shadow-none md:shadow-2xl pointer-events-auto mt-0">
-        <h2 className="font-serif text-[clamp(2rem,8vw,3rem)] md:text-5xl tracking-wide mb-4 md:mb-6">THE SCENT</h2>
+    <section ref={containerRef} id="notes" className="py-20 w-full text-white pointer-events-none relative z-20">
+      <div className="max-w-5xl mx-auto px-6 md:px-12 flex flex-col md:flex-row gap-12 pointer-events-auto">
         
-        <p className="font-light text-sm md:text-xl text-white/90 leading-relaxed max-w-2xl mb-8 md:mb-12 drop-shadow-md">
-          A fresh aquatic composition created for effortless confidence, from the first spray to the final impression.
-        </p>
-
-        <div className="flex flex-row flex-wrap md:flex-nowrap justify-between w-full gap-4 md:gap-8">
-          <div className="scent-note flex flex-col items-center flex-1 min-w-[45%] md:min-w-0">
-            <h3 className="text-[10px] md:text-xs tracking-[0.3em] text-[#D4AF37] mb-1 md:mb-4 border-b border-[#D4AF37]/30 pb-1 w-full">TOP</h3>
-            <p className="font-serif text-sm md:text-xl text-white drop-shadow-md">Bergamot · Pink Pepper</p>
+        {/* Left Side: Transparent spacer to let bottle show */}
+        <div className="hidden md:block w-1/2"></div>
+        
+        {/* Right Side: Scent Notes */}
+        <div className="w-full md:w-1/2 flex flex-col justify-center mt-32 md:mt-0">
+          <div className="mb-12 scent-note">
+            <h2 className="font-serif text-3xl md:text-5xl mb-4 text-right md:text-left drop-shadow-lg">THE ESSENCE</h2>
+            <div className="w-12 h-[1px] bg-[#D4AF37] ml-auto md:ml-0 mb-6"></div>
+            <p className="text-white/80 text-sm leading-relaxed text-right md:text-left drop-shadow-md">
+              A masterful blend of aquatic freshness and deep, resonant woods. Designed to evoke the feeling of standing at the edge of the ocean at midnight.
+            </p>
           </div>
           
-          <div className="scent-note flex flex-col items-center flex-1 min-w-[45%] md:min-w-0">
-            <h3 className="text-[10px] md:text-xs tracking-[0.3em] text-[#D4AF37] mb-1 md:mb-4 border-b border-[#D4AF37]/30 pb-1 w-full">HEART</h3>
-            <p className="font-serif text-sm md:text-xl text-white drop-shadow-md">Jasmine · White Flowers</p>
-          </div>
-          
-          <div className="scent-note flex flex-col items-center w-full md:flex-1 mt-2 md:mt-0">
-            <h3 className="text-[10px] md:text-xs tracking-[0.3em] text-[#D4AF37] mb-1 md:mb-4 border-b border-[#D4AF37]/30 pb-1 w-full md:w-auto">BASE</h3>
-            <p className="font-serif text-sm md:text-xl text-white drop-shadow-md">Amber · Musk · Woody Notes</p>
+          <div className="space-y-8">
+            <div className="border-l border-[#1FDEC3]/30 pl-6 relative scent-note">
+              <div className="absolute w-2 h-2 rounded-full bg-[#1FDEC3] -left-[4.5px] top-2"></div>
+              <h3 className="text-[#1FDEC3] text-sm tracking-[0.2em] mb-2 font-medium">TOP NOTES</h3>
+              <p className="font-serif text-xl md:text-2xl drop-shadow-md">Bergamot, Sea Salt, Lemon Zest</p>
+            </div>
+            
+            <div className="border-l border-white/30 pl-6 relative scent-note">
+              <div className="absolute w-2 h-2 rounded-full bg-white/50 -left-[4.5px] top-2"></div>
+              <h3 className="text-white/60 text-sm tracking-[0.2em] mb-2 font-medium">HEART NOTES</h3>
+              <p className="font-serif text-xl md:text-2xl drop-shadow-md">Blue Lotus, Driftwood, Clary Sage</p>
+            </div>
+            
+            <div className="border-l border-[#D4AF37]/30 pl-6 relative scent-note">
+              <div className="absolute w-2 h-2 rounded-full bg-[#D4AF37] -left-[4.5px] top-2"></div>
+              <h3 className="text-[#D4AF37] text-sm tracking-[0.2em] mb-2 font-medium">BASE NOTES</h3>
+              <p className="font-serif text-xl md:text-2xl drop-shadow-md">Sandalwood, Ambergris, Vetiver</p>
+            </div>
           </div>
         </div>
+        
       </div>
     </section>
   );
