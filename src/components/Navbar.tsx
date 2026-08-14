@@ -40,7 +40,7 @@ const Navbar: React.FC = () => {
       </div>
 
       {/* Mobile Menu */}
-      <div className={`fixed inset-0 bg-[#020C17] z-[-1] transition-transform duration-500 ease-in-out ${mobileMenuOpen ? 'translate-y-0' : '-translate-y-full'} md:hidden flex flex-col items-center justify-center space-y-8 text-lg tracking-widest text-white`}>
+      <div className={`fixed inset-0 bg-[#020C17] z-[35] transition-all duration-500 ease-in-out ${mobileMenuOpen ? 'translate-y-0 opacity-100 pointer-events-auto' : '-translate-y-full opacity-0 pointer-events-none'} md:hidden flex flex-col items-center justify-center space-y-8 text-lg tracking-widest text-white`}>
         <a href="#fragrance" onClick={() => setMobileMenuOpen(false)}>FRAGRANCE</a>
         <a href="#story" onClick={() => setMobileMenuOpen(false)}>THE STORY</a>
         <a href="#notes" onClick={() => setMobileMenuOpen(false)}>NOTES</a>

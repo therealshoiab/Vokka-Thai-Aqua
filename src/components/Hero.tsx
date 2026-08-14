@@ -33,13 +33,13 @@ const Hero: React.FC = () => {
       <div className="flex-1 w-full min-h-[30vh]"></div>
       
       {/* BOTTOM SECTION: CTA */}
-      <div className="w-full flex flex-col items-center mb-8 md:mb-12 pointer-events-auto bg-[#020C17]/10 backdrop-blur-sm md:bg-transparent md:backdrop-blur-none p-4 rounded-xl border border-white/5 md:border-none">
+      <div className="w-full flex flex-col items-center mb-16 md:mb-12 pointer-events-auto bg-transparent md:bg-[#020C17]/10 md:backdrop-blur-sm p-4 rounded-xl md:border md:border-white/5">
         <p ref={descRef} className="opacity-0 translate-y-4 text-white/90 text-[10px] md:text-sm tracking-[0.2em] md:tracking-[0.3em] max-w-md drop-shadow-lg mb-6 uppercase text-center leading-relaxed">
           EAU DE PARFUM <br/>
           <span className="text-[#1FDEC3] lowercase italic font-serif tracking-normal text-sm md:text-base">Fresh · Aquatic · Unisex</span>
         </p>
 
-        <a ref={ctaRef} href="#purchase" className="opacity-0 translate-y-4 inline-block bg-white text-[#020C17] hover:bg-[#1FDEC3] transition-colors py-3 md:py-4 px-8 md:px-10 tracking-widest text-xs md:text-sm font-medium rounded-sm">
+        <a ref={ctaRef} href="#purchase" className="opacity-0 translate-y-4 inline-block bg-white text-[#020C17] hover:bg-[#1FDEC3] transition-colors py-3 md:py-4 px-8 md:px-10 tracking-widest text-xs md:text-sm font-medium rounded-sm shadow-xl">
           SHOP NOW
         </a>
       </div>
