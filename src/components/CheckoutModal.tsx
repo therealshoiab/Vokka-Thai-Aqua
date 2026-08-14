@@ -98,22 +98,40 @@ Please confirm my order.`;
             </div>
             
             <div className="flex items-center justify-between pt-3 border-t border-white/[0.06]">
-              <span className="text-xs text-white/90 tracking-wider font-bold">Select Bottles:</span>
-              <div className="flex items-center gap-2">
-                {[1, 2, 3].map((qty) => (
-                  <button
-                    key={qty}
-                    type="button"
-                    onClick={() => setQuantity(qty)}
-                    className={`w-10 h-10 rounded-sm font-serif text-xs font-bold transition-all ${
-                      quantity === qty
-                        ? 'bg-[#D4AF37] text-[#050B14] shadow-[0_0_15px_rgba(212,175,55,0.25)]'
-                        : 'bg-white/10 border border-white/20 text-white hover:bg-white/25'
-                    }`}
-                  >
-                    {qty}
-                  </button>
-                ))}
+              <div className="flex flex-col">
+                <span className="text-xs text-white/90 tracking-wider font-bold">Select Quantity:</span>
+                {quantity === 2 && (
+                  <span className="text-[9px] font-bold text-[#D4AF37] mt-0.5 tracking-wider">
+                    🎉 10% EXTRA OFF APPLIED
+                  </span>
+                )}
+                {quantity >= 3 && (
+                  <span className="text-[9px] font-bold text-[#D4AF37] mt-0.5 tracking-wider">
+                    🎉 20% EXTRA OFF APPLIED
+                  </span>
+                )}
+              </div>
+              
+              <div className="flex items-center bg-white/[0.03] border border-white/[0.08] rounded-md p-1">
+                <button
+                  type="button"
+                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                  className="w-8 h-8 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/5 transition-all text-base font-bold rounded"
+                >
+                  −
+                </button>
+                
+                <span className="w-10 text-center font-sans font-bold text-sm text-white select-none">
+                  {quantity}
+                </span>
+                
+                <button
+                  type="button"
+                  onClick={() => setQuantity(quantity + 1)}
+                  className="w-8 h-8 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/5 transition-all text-base font-bold rounded"
+                >
+                  +
+                </button>
               </div>
             </div>
           </div>
