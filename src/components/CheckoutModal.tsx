@@ -12,7 +12,9 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, initialQ
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
-    address: '',
+    houseNo: '',
+    street: '',
+    landmark: '',
     city: '',
     state: '',
     pincode: '',
@@ -58,8 +60,10 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, initialQ
 💳 *Payment Mode:* ${formData.paymentPreference}
 
 📍 *Delivery Address:*
-${formData.address}
-${formData.city}, ${formData.state} - ${formData.pincode}
+Flat/House No: ${formData.houseNo}
+Street/Area: ${formData.street}
+Landmark: ${formData.landmark}
+City/State: ${formData.city}, ${formData.state} - ${formData.pincode}
 ----------------------------------
 Please confirm my order.`;
 
@@ -141,7 +145,9 @@ Please confirm my order.`;
             {[
               { label: 'Full Name', name: 'name', placeholder: 'Enter your name', type: 'text' },
               { label: 'Mobile Number', name: 'phone', placeholder: '10-digit mobile number', type: 'tel', maxLength: 10 },
-              { label: 'Delivery Address', name: 'address', placeholder: 'House/Flat No, Street Name, Landmark', type: 'text' },
+              { label: 'House No / Flat No / Floor / etc.', name: 'houseNo', placeholder: 'House/Flat No, Floor, Building', type: 'text' },
+              { label: 'Street / Area / Locality', name: 'street', placeholder: 'Street Name, Area, Locality', type: 'text' },
+              { label: 'Nearby Places / Landmark', name: 'landmark', placeholder: 'Nearby school, hospital, market, etc.', type: 'text' },
             ].map((field) => (
               <div key={field.name}>
                 <label className="text-[10px] tracking-widest text-[#F5E6C8] uppercase block mb-1.5 font-bold">{field.label} *</label>
