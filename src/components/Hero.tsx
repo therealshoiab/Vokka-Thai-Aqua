@@ -21,7 +21,7 @@ const Hero: React.FC = () => {
     <section id="hero" ref={containerRef} className="relative w-full h-[100vh] flex flex-col justify-between py-24 px-6 md:px-12 text-white pointer-events-none z-10">
       
       {/* TOP SECTION: TITLE */}
-      <div className="w-full flex flex-col items-center mt-4 md:mt-12 pointer-events-auto">
+      <div className="w-full flex flex-col items-center mt-0 md:mt-12 pointer-events-auto">
         <p ref={subtitleRef} className="opacity-0 translate-y-4 text-[#D4AF37] tracking-[0.4em] text-sm md:text-base font-medium mb-2 drop-shadow-md">VÖKKA</p>
         
         <h1 ref={titleRef} className="opacity-0 translate-y-8 font-serif text-[clamp(2.5rem,10vw,5rem)] md:text-7xl lg:text-8xl tracking-wider mb-2 drop-shadow-xl text-center leading-none">

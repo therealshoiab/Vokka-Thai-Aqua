@@ -16,6 +16,7 @@ export const usePreloader = () => {
     const loadFrame = (index: number) => {
       return new Promise<void>((resolve) => {
         const img = new Image();
+        img.crossOrigin = 'anonymous';
         const frameNumber = (index + 1).toString().padStart(4, '0');
         // import.meta.env.BASE_URL handles GitHub Pages subdirectory correctly
         const baseUrl = import.meta.env.BASE_URL;

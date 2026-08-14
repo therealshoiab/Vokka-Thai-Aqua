@@ -22,7 +22,7 @@ const ProductSequence: React.FC<ProductSequenceProps> = ({ images }) => {
     if (!canvasRef.current || imagesRef.current.length === 0) return;
 
     const canvas = canvasRef.current;
-    const context = canvas.getContext('2d');
+    const context = canvas.getContext('2d', { alpha: false });
     if (!context) return;
 
     canvas.width = 1920;
@@ -38,7 +38,7 @@ const ProductSequence: React.FC<ProductSequenceProps> = ({ images }) => {
 
     render(0);
 
-    const frameCount = 240;
+    const frameCount = imagesRef.current.length;
     const playhead = { frame: 0 };
 
     const st = ScrollTrigger.create({
@@ -57,13 +57,13 @@ const ProductSequence: React.FC<ProductSequenceProps> = ({ images }) => {
     return () => {
       st.kill();
     };
-  }, []); // Empty dependency array so ScrollTrigger is created only once
+  }, []); 
 
   return (
     <div className="fixed inset-0 z-0 w-full h-full pointer-events-none bg-[#020C17]">
       <canvas
         ref={canvasRef}
-        className="w-full h-full object-contain md:object-cover"
+        className="w-full h-full object-cover"
       />
     </div>
   );
