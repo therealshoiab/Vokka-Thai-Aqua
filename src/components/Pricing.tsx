@@ -1,7 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import { Check } from 'lucide-react';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { splitTextReveal } from '../utils/animations';
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface PricingProps {
   onBuyClick?: () => void;
