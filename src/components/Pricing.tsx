@@ -83,7 +83,7 @@ const Pricing: React.FC<PricingProps> = ({ onBuyClick }) => {
   ];
 
   return (
-    <section id="pricing" ref={containerRef} className="py-28 w-full bg-gradient-to-b from-[#050B14] via-[#050B14]/80 to-[#050B14] border-y border-white/[0.05] backdrop-blur-md text-white z-20 relative pointer-events-auto">
+    <section id="pricing" ref={containerRef} className="py-28 w-full bg-white/[0.01] border-y border-white/[0.06] backdrop-blur-md text-white z-20 relative pointer-events-auto">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         
         <div className="text-center max-w-3xl mx-auto mb-20">

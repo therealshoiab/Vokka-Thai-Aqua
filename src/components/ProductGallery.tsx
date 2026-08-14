@@ -71,7 +71,7 @@ const ProductGallery: React.FC = () => {
   };
 
   return (
-    <section ref={containerRef} className="py-24 w-full bg-[#050B14] text-white z-20 relative pointer-events-auto border-t border-white/[0.05] overflow-hidden">
+    <section ref={containerRef} className="py-24 w-full bg-white/[0.01] backdrop-blur-md text-white z-20 relative pointer-events-auto border-t border-white/[0.05] overflow-hidden">
       
       {/* Title Block - Only Eyebrow and Headline (No descriptions) */}
       <div ref={titleRef} className="text-center max-w-2xl mx-auto mb-16 px-6">
