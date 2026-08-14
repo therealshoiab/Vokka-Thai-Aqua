@@ -1,31 +1,27 @@
 import SplitType from 'split-type';
 import gsap from 'gsap';
 
-export const splitTextReveal = (element: HTMLElement, options?: { delay?: number; stagger?: number; duration?: number }) => {
+export const splitTextReveal = (
+  element: HTMLElement, 
+  options?: { delay?: number; stagger?: number; duration?: number }
+) => {
   const text = new SplitType(element, { types: 'chars,words' });
   
   if (!text.chars) return;
 
-  // Initial state
+  // Simple initial state — no blur or scale for mobile performance
   gsap.set(text.chars, {
-    y: 50,
+    y: 40,
     opacity: 0,
-    filter: 'blur(10px)',
-    scale: 0.9
   });
 
-  // Animation
+  // Clean animation — works reliably on mobile and desktop
   return gsap.to(text.chars, {
     y: 0,
     opacity: 1,
-    filter: 'blur(0px)',
-    scale: 1,
-    duration: options?.duration || 1.2,
+    duration: options?.duration || 1,
     ease: 'power3.out',
-    stagger: options?.stagger || 0.04,
+    stagger: options?.stagger || 0.03,
     delay: options?.delay || 0,
-    onComplete: () => {
-      // Clean up SplitType elements if needed, or leave them for reverse animation
-    }
   });
 };

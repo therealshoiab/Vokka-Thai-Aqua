@@ -4,7 +4,6 @@ import Navbar from './components/Navbar';
 import ProductSequence from './components/ProductSequence';
 import Hero from './components/Hero';
 import ScentNotes from './components/ScentNotes';
-import Reveal from './components/Reveal';
 import ProductDetails from './components/ProductDetails';
 import Pricing from './components/Pricing';
 import Testimonials from './components/Testimonials';
@@ -26,7 +25,7 @@ function App() {
     if (isInitialLoaded) {
       setTimeout(() => {
         ScrollTrigger.refresh();
-      }, 100);
+      }, 300);
     }
   }, [isInitialLoaded]);
 
@@ -47,7 +46,7 @@ function App() {
           <div className="relative z-10 w-full overflow-x-hidden">
             <Hero onBuyClick={() => openCheckout(1)} />
             <ScentNotes />
-            <Reveal />
+            {/* Reveal section removed — was causing ghost "CRAFTED TO" text between sections */}
             <ProductDetails />
             <Pricing onBuyClick={(qty) => openCheckout(qty)} />
             <Testimonials />

@@ -11,23 +11,22 @@ const ProductDetails: React.FC = () => {
   useEffect(() => {
     if (!gridRef.current) return;
 
-    const cards = gsap.utils.toArray('.spec-card');
-    cards.forEach((card: any, index: number) => {
-      gsap.fromTo(card, 
-        { opacity: 0, y: 40 },
-        {
-          scrollTrigger: {
-            trigger: card,
-            start: "top 85%",
-            toggleActions: "play none none reverse"
-          },
+    const cards = gsap.utils.toArray<HTMLElement>('.spec-card');
+    gsap.set(cards, { opacity: 0, y: 40 });
+
+    ScrollTrigger.create({
+      trigger: gridRef.current,
+      start: 'top 85%',
+      onEnter: () => {
+        gsap.to(cards, {
           opacity: 1,
           y: 0,
-          duration: 1,
-          ease: "power3.out",
-          delay: index * 0.1
-        }
-      );
+          duration: 0.8,
+          stagger: 0.1,
+          ease: 'power3.out',
+        });
+      },
+      once: true,
     });
   }, []);
 

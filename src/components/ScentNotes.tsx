@@ -28,29 +28,24 @@ const ScentNotes: React.FC = () => {
       }
     );
 
-    // Cards staggered entry
-    const cards = gsap.utils.toArray('.scent-card');
-    cards.forEach((card: any, index: number) => {
-      gsap.fromTo(card, 
-        { 
-          opacity: 0, 
-          y: 60,
-          scale: 0.95
-        },
-        {
-          scrollTrigger: {
-            trigger: card,
-            start: "top 85%",
-            toggleActions: "play none none reverse"
-          },
+    // Cards staggered entry — single trigger for mobile reliability
+    const cards = gsap.utils.toArray<HTMLElement>('.scent-card');
+    const grid = containerRef.current?.querySelector('.scent-grid');
+    gsap.set(cards, { opacity: 0, y: 50 });
+
+    ScrollTrigger.create({
+      trigger: grid || containerRef.current,
+      start: 'top 85%',
+      onEnter: () => {
+        gsap.to(cards, {
           opacity: 1,
           y: 0,
-          scale: 1,
-          duration: 1.2,
-          ease: "power4.out",
-          delay: index * 0.15
-        }
-      );
+          duration: 0.9,
+          stagger: 0.12,
+          ease: 'power3.out',
+        });
+      },
+      once: true,
     });
   }, []);
 
@@ -69,7 +64,7 @@ const ScentNotes: React.FC = () => {
         </div>
 
         {/* 3-Tier Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 w-full items-stretch">
+        <div className="scent-grid grid grid-cols-1 lg:grid-cols-3 gap-8 w-full items-stretch">
           
           {/* Card 1: Top Notes */}
           <div className="scent-card flex flex-col p-8 bg-white/[0.02] border border-white/[0.08] backdrop-blur-xl rounded-xl shadow-[0_4px_30px_rgba(0,0,0,0.4)] relative overflow-hidden group hover:border-[#D4AF37]/30 transition-all duration-300">
