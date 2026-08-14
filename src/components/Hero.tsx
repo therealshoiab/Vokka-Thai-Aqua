@@ -1,7 +1,11 @@
 import React, { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 
-const Hero: React.FC = () => {
+interface HeroProps {
+  onBuyClick?: () => void;
+}
+
+const Hero: React.FC<HeroProps> = ({ onBuyClick }) => {
   const containerRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
@@ -39,9 +43,13 @@ const Hero: React.FC = () => {
           <span className="text-[#1FDEC3] lowercase italic font-serif tracking-normal text-sm md:text-base">Fresh · Aquatic · Unisex</span>
         </p>
 
-        <a ref={ctaRef} href="#purchase" className="opacity-0 translate-y-4 inline-block bg-white text-[#020C17] hover:bg-[#1FDEC3] transition-colors py-3 md:py-4 px-8 md:px-10 tracking-widest text-xs md:text-sm font-medium rounded-sm shadow-xl">
+        <button 
+          ref={ctaRef}
+          onClick={onBuyClick}
+          className="opacity-0 translate-y-4 mt-12 bg-white text-[#020C17] px-8 py-3 tracking-widest text-sm font-medium hover:bg-[#1FDEC3] transition-colors rounded-sm pointer-events-auto shadow-2xl"
+        >
           SHOP NOW
-        </a>
+        </button>
       </div>
       
       <div className="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 md:gap-4 animate-pulse pointer-events-none">

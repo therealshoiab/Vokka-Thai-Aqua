@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+interface NavbarProps {
+  onShopClick?: () => void;
+}
 
-const Navbar: React.FC = () => {
+const Navbar: React.FC<NavbarProps> = ({ onShopClick }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -22,7 +25,10 @@ const Navbar: React.FC = () => {
         </div>
 
         <div className="hidden md:block">
-          <button className="text-sm tracking-widest bg-white text-[#020C17] px-6 py-2 rounded-sm hover:bg-[#1FDEC3] transition-colors font-medium">
+          <button 
+            onClick={onShopClick}
+            className="text-sm tracking-widest bg-white text-[#020C17] px-6 py-2 rounded-sm hover:bg-[#1FDEC3] transition-colors font-medium"
+          >
             SHOP NOW
           </button>
         </div>
@@ -36,7 +42,13 @@ const Navbar: React.FC = () => {
       </div>
 
       <div className={`fixed inset-0 bg-[#020C17] z-[35] transition-all duration-500 ease-in-out ${mobileMenuOpen ? 'translate-y-0 opacity-100 pointer-events-auto' : '-translate-y-full opacity-0 pointer-events-none'} md:hidden flex flex-col items-center justify-center space-y-8 text-lg tracking-widest text-white`}>
-        <button className="mt-8 text-sm tracking-widest bg-white text-[#020C17] px-8 py-3 rounded-sm">
+        <button 
+          onClick={() => {
+            setMobileMenuOpen(false);
+            if (onShopClick) onShopClick();
+          }}
+          className="mt-8 text-sm tracking-widest bg-white text-[#020C17] px-8 py-3 rounded-sm"
+        >
           SHOP NOW
         </button>
       </div>
