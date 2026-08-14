@@ -73,15 +73,17 @@ const ProductGallery: React.FC = () => {
   return (
     <section ref={containerRef} className="py-24 w-full bg-white/[0.01] backdrop-blur-md text-white z-20 relative pointer-events-auto border-t border-white/[0.05] overflow-hidden">
       
-      {/* Title Block - Only Eyebrow and Headline (No descriptions) */}
-      <div ref={titleRef} className="text-center max-w-2xl mx-auto mb-16 px-6">
-        <span className="text-[#D4AF37] tracking-[0.3em] text-[10px] md:text-xs font-bold uppercase mb-4 block animate-pulse">VISUAL CAMPAIGN</span>
-        <h2 className="font-serif text-3xl md:text-5xl font-bold tracking-wider text-white">THAI AQUA IN FOCUS</h2>
-        <div className="w-12 h-[1px] bg-[#D4AF37] mx-auto mt-6"></div>
+      {/* Title Block - Left-aligned matching "CRAFTED WITHOUT COMPROMISE" */}
+      <div ref={titleRef} className="max-w-2xl mb-16 px-6 md:px-12 text-left">
+        <h2 className="font-serif text-3xl md:text-5xl font-bold tracking-wider mb-4 text-shadow-premium">THAI AQUA IN FOCUS</h2>
+        <div className="w-16 h-[1px] bg-[#F5E6C8] mb-6"></div>
+        <p className="text-white text-sm leading-relaxed text-shadow-premium font-bold">
+          Explore the luxury bottle design of VÖKKA Thai Aqua in its natural element. Premium heavy-molded glass crowned with a champagne-knurled gold cap.
+        </p>
       </div>
 
       {/* Interactive Carousel Wrapper */}
-      <div className="relative w-full px-4 md:px-12">
+      <div className="relative w-full">
         
         {/* Navigation Arrows - Desktop Only */}
         <button 
@@ -97,16 +99,16 @@ const ProductGallery: React.FC = () => {
           <ChevronRight size={20} />
         </button>
 
-        {/* Scroll Container */}
+        {/* Scroll Container - Stacked vertically on mobile, horizontally scrolling on desktop */}
         <div 
           ref={scrollContainerRef}
-          className="flex overflow-x-auto gap-6 snap-x snap-mandatory scrollbar-none w-full py-4 px-4 md:px-12 scroll-smooth"
+          className="flex flex-col md:flex-row gap-8 md:gap-6 md:overflow-x-auto md:snap-x md:snap-mandatory md:scrollbar-none w-full py-4 px-6 md:px-12 scroll-smooth"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           {images.map((img, i) => (
             <div 
               key={i} 
-              className="flex-shrink-0 w-[85vw] md:w-[60vw] lg:w-[48vw] snap-center aspect-[16/10] bg-white/[0.01] border border-white/[0.07] rounded-2xl overflow-hidden shadow-2xl relative group"
+              className="w-full md:w-[60vw] lg:w-[48vw] md:flex-shrink-0 snap-center aspect-[16/10] bg-white/[0.01] border border-white/[0.07] rounded-2xl overflow-hidden shadow-2xl relative group"
             >
               <img 
                 src={img.src} 
