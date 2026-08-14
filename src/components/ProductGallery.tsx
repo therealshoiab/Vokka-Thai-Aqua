@@ -71,7 +71,7 @@ const ProductGallery: React.FC = () => {
   };
 
   return (
-    <section ref={containerRef} className="py-24 w-full bg-white/[0.01] backdrop-blur-md text-white z-20 relative pointer-events-auto border-t border-white/[0.05] overflow-hidden">
+    <section ref={containerRef} className="py-24 w-full bg-transparent text-white z-20 relative pointer-events-auto border-t border-white/[0.05] overflow-hidden">
       
       {/* Title Block - Left-aligned matching "CRAFTED WITHOUT COMPROMISE" */}
       <div ref={titleRef} className="max-w-2xl mb-16 px-6 md:px-12 text-left">
@@ -115,13 +115,6 @@ const ProductGallery: React.FC = () => {
                 alt={`Vokka Thai Aqua scene ${i+1}`}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              
-              {/* Glassmorphic Scene Tab on top of image */}
-              <div className="absolute top-4 left-4 z-20 bg-white/[0.08] backdrop-blur-md border border-white/[0.15] px-4 py-2 rounded-full shadow-[0_4px_30px_rgba(0,0,0,0.2)]">
-                <span className="text-[#D4AF37] text-[10px] tracking-[0.25em] font-extrabold uppercase">
-                  {img.label}
-                </span>
-              </div>
             </div>
           ))}
         </div>

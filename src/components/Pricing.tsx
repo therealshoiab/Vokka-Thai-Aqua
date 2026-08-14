@@ -122,22 +122,22 @@ const Pricing: React.FC<PricingProps> = ({ onBuyClick }) => {
                     </span>
                   )}
                 </div>
-                <p className="text-white/60 text-xs leading-relaxed h-12 font-medium tracking-wide">{plan.description}</p>
+                <p className="text-white text-xs leading-relaxed h-12 font-bold tracking-wide">{plan.description}</p>
               </div>
               
               {/* Elegant, clean, high-contrast sans-serif numbers (no fallbacks or pixelated outlines) */}
               <div className="mb-8 flex items-baseline gap-2.5 font-sans">
                 <span className="text-base font-semibold text-[#D4AF37] self-start mt-1">₹</span>
                 <span className="text-5xl font-light tracking-tight text-white">{plan.price}</span>
-                <span className="text-xs text-white/40 line-through ml-1">₹{plan.mrp}</span>
+                <span className="text-xs text-white/80 font-bold line-through ml-1">₹{plan.mrp}</span>
               </div>
               
               <div className="flex-grow mb-10">
                 <div className="space-y-4">
                   {plan.features.map((feature, i) => (
-                    <div key={i} className="flex items-center gap-3.5 text-xs text-white/80">
+                    <div key={i} className="flex items-center gap-3.5 text-xs text-white">
                       <Check size={14} className="shrink-0 text-[#D4AF37]" />
-                      <span className="font-light tracking-wide">{feature}</span>
+                      <span className="font-bold tracking-wide">{feature}</span>
                     </div>
                   ))}
                 </div>
