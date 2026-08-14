@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Check } from 'lucide-react';
 
 const Purchase: React.FC = () => {
-  const [quantity, setQuantity] = useState(1);
 
   return (
     <section id="purchase" className="py-20 w-full bg-[#020C17] text-white z-20 relative border-t border-white/5 pointer-events-auto">
