@@ -30,7 +30,7 @@ const Reveal: React.FC = () => {
   }, []);
 
   return (
-    <section ref={containerRef} id="details" className="h-[100vh] md:h-[150vh] w-full relative text-white pointer-events-none">
+    <section ref={containerRef} id="details" className="h-[200vh] md:h-[300vh] w-full relative text-white pointer-events-none">
       <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-start md:justify-center pt-24 md:pt-0">
         <div className="absolute md:top-1/4 top-[15%] text-center reveal-title bg-[#020C17]/40 backdrop-blur-sm px-6 md:px-12 py-4 md:py-8 rounded-xl border border-white/5 shadow-2xl">
           <p className="text-[10px] md:text-xs tracking-[0.4em] text-[#1FDEC3] mb-2 md:mb-4 drop-shadow-md">EVERY DETAIL MATTERS</p>

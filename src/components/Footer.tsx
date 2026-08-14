@@ -27,14 +27,7 @@ const Footer: React.FC = () => {
           </div>
         </div>
         
-        <div>
-          <h3 className="text-sm tracking-widest mb-6 font-medium">FOLLOW US</h3>
-          <div className="flex gap-6 text-sm tracking-widest text-white/50">
-            <a href="#" className="hover:text-white transition-colors">Instagram</a>
-            <a href="#" className="hover:text-white transition-colors">Facebook</a>
-            <a href="#" className="hover:text-white transition-colors">X</a>
-          </div>
-        </div>
+        {/* Social links removed as requested */}
         
       </div>
       

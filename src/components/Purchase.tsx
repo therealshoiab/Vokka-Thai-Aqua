@@ -19,15 +19,22 @@ const Purchase: React.FC = () => {
             <h2 className="font-serif text-3xl md:text-4xl mb-2 tracking-wide">VÖKKA THAI AQUA</h2>
             <p className="text-[#0089A7] tracking-[0.2em] text-xs font-medium uppercase mb-4">EAU DE PARFUM</p>
             
-            <div className="flex flex-wrap justify-center md:justify-start gap-4 text-xs tracking-widest text-white/70 mb-8">
-              <span className="bg-white/5 px-3 py-1 rounded-full">100 ML</span>
-              <span className="bg-white/5 px-3 py-1 rounded-full">UNISEX</span>
-              <span className="bg-white/5 px-3 py-1 rounded-full">FRESH / AQUATIC</span>
-              <span className="bg-white/5 px-3 py-1 rounded-full">DAY → NIGHT</span>
+            <p className="text-white/90 font-serif text-sm md:text-base leading-relaxed mb-6">
+              VOKKA Thai Aqua 100 ml Unisex Luxury Long Lasting Aqua Perfume For Men And Women
+            </p>
+
+            <div className="w-full border border-white/10 rounded-lg overflow-hidden bg-white/5 backdrop-blur-sm mb-6 text-sm">
+              <div className="bg-white/5 py-2 px-4 border-b border-white/10 font-medium tracking-wider text-xs text-[#1FDEC3] uppercase">Product Highlights</div>
+              <div className="grid grid-cols-2 gap-y-2 p-4 text-white/80">
+                <div className="text-white/50">Net Quantity (N)</div><div>1</div>
+                <div className="text-white/50">Flavour</div><div>Sandalwood</div>
+                <div className="text-white/50">Brand</div><div>Vokka</div>
+                <div className="text-white/50">Capacity</div><div>100ml</div>
+              </div>
             </div>
           </div>
           
-          <div className="text-4xl font-serif mb-8 text-[#D4AF37]">₹4,999</div>
+          <div className="text-4xl font-serif mb-8 text-[#D4AF37]">₹999</div>
           
           <div className="flex flex-col w-full max-w-sm gap-4 mb-8">
             <button className="w-full bg-white text-[#020C17] hover:bg-[#1FDEC3] transition-colors py-4 px-8 tracking-widest text-sm font-medium rounded-sm">
@@ -40,7 +47,7 @@ const Purchase: React.FC = () => {
           
           <div className="flex justify-center md:justify-start gap-6 text-xs text-white/50 tracking-wider w-full">
             <span className="flex items-center gap-1"><Check size={14} className="text-[#1FDEC3]" /> Free Shipping</span>
-            <span className="flex items-center gap-1"><Check size={14} className="text-[#1FDEC3]" /> Secure</span>
+            <span className="flex items-center gap-1"><Check size={14} className="text-[#1FDEC3]" /> 7 Days Delivery</span>
           </div>
         </div>
         
