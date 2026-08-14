@@ -10,7 +10,7 @@ const Purchase: React.FC = () => {
         
         {/* Left: Product visual */}
         <div className="w-full md:w-1/2 flex justify-center md:justify-start">
-           <img src="/frames/0240.webp" alt="VÖKKA Thai Aqua" className="w-full aspect-[3/4] max-w-md object-cover rounded-sm shadow-2xl" />
+           <img src={`${import.meta.env.BASE_URL}frames/0240.webp`} alt="VÖKKA Thai Aqua" className="w-full aspect-[3/4] max-w-md object-cover rounded-sm shadow-2xl" />
         </div>
         
         {/* Right: Purchase options */}

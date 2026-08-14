@@ -16,15 +16,14 @@ export const usePreloader = () => {
     const loadFrame = (index: number) => {
       return new Promise<void>((resolve) => {
         const img = new Image();
-        // Calculate frame number 0001 to 0240
         const frameNumber = (index + 1).toString().padStart(4, '0');
-        img.src = `/frames/${frameNumber}.webp`;
+        // import.meta.env.BASE_URL handles GitHub Pages subdirectory correctly
+        const baseUrl = import.meta.env.BASE_URL;
+        img.src = `${baseUrl}frames/${frameNumber}.webp`;
         
-        img.onload = () => {
+        const handleComplete = () => {
           if (!mounted) return;
-          images[index] = img;
           loadedCount++;
-          
           setProgress(Math.round((loadedCount / TOTAL_FRAMES) * 100));
           
           if (loadedCount === INITIAL_FRAMES) {
@@ -38,10 +37,15 @@ export const usePreloader = () => {
           resolve();
         };
 
+        img.onload = () => {
+          if (!mounted) return;
+          images[index] = img;
+          handleComplete();
+        };
+
         img.onerror = () => {
           console.error(`Failed to load frame ${frameNumber}`);
-          loadedCount++;
-          resolve(); // Resolve anyway to not block
+          handleComplete();
         };
       });
     };
