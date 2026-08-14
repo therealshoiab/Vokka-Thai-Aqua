@@ -33,8 +33,8 @@ const Pricing: React.FC<PricingProps> = ({ onBuyClick }) => {
     {
       id: 'single',
       name: 'Single Bottle',
-      price: '₹224',
-      mrp: '₹1,149',
+      price: '₹600',
+      mrp: '₹2,999',
       quantity: 1,
       description: 'Experience VÖKKA Thai Aqua at direct launch pricing.',
       features: [
@@ -49,8 +49,8 @@ const Pricing: React.FC<PricingProps> = ({ onBuyClick }) => {
     {
       id: 'double',
       name: 'Double Luxury Pack',
-      price: '₹420',
-      mrp: '₹2,298',
+      price: '₹1,080',
+      mrp: '₹5,998',
       discount: '10% EXTRA OFF',
       quantity: 2,
       description: 'Our absolute best value. One for home, one for travel.',
@@ -66,8 +66,8 @@ const Pricing: React.FC<PricingProps> = ({ onBuyClick }) => {
     {
       id: 'triple',
       name: 'Collector\'s Trio',
-      price: '₹599',
-      mrp: '₹3,447',
+      price: '₹1,440',
+      mrp: '₹8,997',
       discount: '20% EXTRA OFF',
       quantity: 3,
       description: 'Never run out of your signature marine sillage.',
@@ -83,14 +83,14 @@ const Pricing: React.FC<PricingProps> = ({ onBuyClick }) => {
   ];
 
   return (
-    <section id="pricing" ref={containerRef} className="py-24 w-full bg-[#050B14] text-white z-20 relative border-t border-white/5 pointer-events-auto">
+    <section id="pricing" ref={containerRef} className="py-24 w-full bg-white/[0.01] border-y border-white/[0.06] backdrop-blur-md text-white z-20 relative pointer-events-auto">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <p className="text-[#00F0FF] tracking-[0.2em] text-[10px] md:text-xs font-bold uppercase mb-4">DIRECT LAUNCH PRICING</p>
+          <p className="text-[#00F0FF] tracking-[0.2em] text-[10px] md:text-xs font-bold uppercase mb-4 text-shadow-premium">DIRECT LAUNCH PRICING</p>
           <h2 ref={titleRef} className="invisible font-serif text-3xl md:text-5xl font-bold tracking-wide drop-shadow-md text-white">CHOOSE YOUR QUANTITY</h2>
           <div className="w-16 h-[1px] bg-[#F5E6C8] mx-auto my-6"></div>
-          <p className="text-white/60 text-xs md:text-sm leading-relaxed">
+          <p className="text-white/80 text-xs md:text-sm leading-relaxed text-shadow-premium font-medium">
             VOKKA Thai Aqua 100 ml Unisex Luxury Long Lasting Aqua Perfume. Secure your bottle directly from our launch batch with Cash on Delivery options.
           </p>
         </div>
@@ -101,8 +101,8 @@ const Pricing: React.FC<PricingProps> = ({ onBuyClick }) => {
               key={plan.id} 
               className={`relative flex flex-col p-8 rounded-xl border transition-all duration-300 ${
                 plan.isFeatured 
-                  ? 'bg-gradient-to-b from-[#00F0FF]/10 to-[#0A1320] border-[#00F0FF]/40 shadow-[0_0_40px_rgba(0,240,255,0.15)] transform md:-translate-y-3' 
-                  : 'bg-white/[0.02] border-white/[0.08] hover:border-white/20 hover:bg-white/[0.04]'
+                  ? 'bg-white/[0.04] backdrop-blur-2xl border-[#00F0FF]/40 shadow-[0_0_40px_rgba(0,240,255,0.12)] transform md:-translate-y-3' 
+                  : 'bg-white/[0.02] border-white/[0.08] backdrop-blur-xl hover:border-white/20 hover:bg-white/[0.04]'
               }`}
             >
               {plan.isFeatured && (
@@ -122,7 +122,7 @@ const Pricing: React.FC<PricingProps> = ({ onBuyClick }) => {
                     </span>
                   )}
                 </div>
-                <p className="text-white/50 text-xs leading-relaxed h-12">{plan.description}</p>
+                <p className="text-white/70 text-xs leading-relaxed h-12 text-shadow-premium font-medium">{plan.description}</p>
               </div>
               
               <div className="mb-6 flex items-baseline gap-2">
@@ -133,9 +133,9 @@ const Pricing: React.FC<PricingProps> = ({ onBuyClick }) => {
               <div className="flex-grow">
                 <div className="space-y-4 mb-8">
                   {plan.features.map((feature, i) => (
-                    <div key={i} className="flex items-start gap-3 text-xs text-white/80">
+                    <div key={i} className="flex items-start gap-3 text-xs text-white/90">
                       <Check size={14} className={`mt-0.5 shrink-0 ${plan.isFeatured ? 'text-[#00F0FF]' : 'text-[#F5E6C8]'}`} />
-                      <span>{feature}</span>
+                      <span className="text-shadow-premium font-medium">{feature}</span>
                     </div>
                   ))}
                 </div>

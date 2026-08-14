@@ -30,10 +30,10 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, initialQ
 
   // Pricing logic
   const getPrice = (qty: number) => {
-    if (qty === 1) return 224;
-    if (qty === 2) return 420;
-    if (qty === 3) return 599;
-    return qty * 200; // Fallback
+    if (qty === 1) return 600;
+    if (qty === 2) return 1080;
+    if (qty === 3) return 1440;
+    return qty * 480; // Fallback
   };
 
   const totalPrice = getPrice(quantity);
@@ -84,7 +84,7 @@ Please confirm my order.`;
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
       <div className="absolute inset-0 bg-[#050B14]/85 backdrop-blur-md" onClick={onClose}></div>
       
-      <div className="relative w-full max-w-lg bg-white/[0.03] border border-white/[0.1] backdrop-blur-xl shadow-2xl rounded-xl overflow-hidden max-h-[90vh] flex flex-col z-10">
+      <div className="relative w-full max-w-lg bg-[#0A1320]/90 border border-white/[0.1] backdrop-blur-xl shadow-2xl rounded-xl overflow-hidden max-h-[90vh] flex flex-col z-10">
         
         {/* Header */}
         <div className="flex justify-between items-center p-6 border-b border-white/[0.08] bg-white/[0.02]">

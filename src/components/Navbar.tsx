@@ -35,7 +35,7 @@ const Navbar: React.FC<NavbarProps> = ({ onShopClick }) => {
             className="flex items-center gap-2 text-xs md:text-sm tracking-[0.15em] font-bold bg-white text-[#050B14] px-5 py-2.5 rounded-sm hover:bg-[#00F0FF] hover:text-[#050B14] transition-all duration-300 shadow-[0_0_15px_rgba(255,255,255,0.1)] hover:shadow-[0_0_20px_rgba(0,240,255,0.4)]"
           >
             <ShoppingBag size={14} />
-            ORDER NOW — ₹224
+            ORDER NOW — ₹600
           </button>
         </div>
       </div>

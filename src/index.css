@@ -55,3 +55,27 @@
   animation-play-state: paused;
 }
 
+/* SplitType Layout Fixes */
+.line {
+  display: block;
+}
+
+.word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.char {
+  display: inline-block;
+  will-change: transform, opacity, filter;
+}
+
+/* High-readability luxury text shadow */
+.text-shadow-premium {
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.95), 0 2px 5px rgba(0, 0, 0, 0.9);
+}
+
+.text-stroke-subtle {
+  -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.1);
+}
+
