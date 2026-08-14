@@ -1,78 +1,154 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Sparkles, Heart, Anchor } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const ScentNotes: React.FC = () => {
   const containerRef = useRef<HTMLElement>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!containerRef.current) return;
     
-    const notes = gsap.utils.toArray('.scent-note');
-    notes.forEach((note: any, i: number) => {
-      // Alternate sliding from left and right
-      const xOffset = i % 2 === 0 ? -50 : 50;
-      
-      gsap.fromTo(note, 
+    // Header title animation
+    gsap.fromTo(titleRef.current, 
+      { opacity: 0, y: 30 },
+      {
+        scrollTrigger: {
+          trigger: titleRef.current,
+          start: "top 85%",
+          toggleActions: "play none none reverse"
+        },
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power3.out"
+      }
+    );
+
+    // Cards staggered entry
+    const cards = gsap.utils.toArray('.scent-card');
+    cards.forEach((card: any, index: number) => {
+      gsap.fromTo(card, 
         { 
           opacity: 0, 
-          x: xOffset,
+          y: 60,
           scale: 0.95
-        }, 
+        },
         {
           scrollTrigger: {
-            trigger: note,
+            trigger: card,
             start: "top 85%",
             toggleActions: "play none none reverse"
           },
           opacity: 1,
-          x: 0,
+          y: 0,
           scale: 1,
-          duration: 1,
-          ease: "power3.out"
+          duration: 1.2,
+          ease: "power4.out",
+          delay: index * 0.15
         }
       );
     });
   }, []);
 
   return (
-    <section ref={containerRef} id="notes" className="py-20 w-full text-white pointer-events-none relative z-20">
-      <div className="max-w-5xl mx-auto px-6 md:px-12 flex flex-col md:flex-row gap-12 pointer-events-auto">
+    <section ref={containerRef} id="notes" className="py-24 w-full text-white pointer-events-none relative z-20 overflow-hidden bg-transparent">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col items-center pointer-events-auto">
         
-        {/* Left Side: Transparent spacer to let bottle show */}
-        <div className="hidden md:block w-1/2"></div>
-        
-        {/* Right Side: Scent Notes */}
-        <div className="w-full md:w-1/2 flex flex-col justify-center mt-32 md:mt-0">
-          <div className="mb-12 scent-note">
-            <h2 className="font-serif text-3xl md:text-5xl mb-4 text-right md:text-left drop-shadow-lg">THE ESSENCE</h2>
-            <div className="w-12 h-[1px] bg-[#D4AF37] ml-auto md:ml-0 mb-6"></div>
-            <p className="text-white/80 text-sm leading-relaxed text-right md:text-left drop-shadow-md">
-              A masterful blend of aquatic freshness and deep, resonant woods. Designed to evoke the feeling of standing at the edge of the ocean at midnight.
-            </p>
-          </div>
+        {/* Title Block */}
+        <div ref={titleRef} className="text-center max-w-2xl mb-16">
+          <span className="text-[#00F0FF] tracking-[0.3em] text-[10px] md:text-xs font-bold uppercase mb-3 block">OLFACTORY ARCHITECTURE</span>
+          <h2 className="font-serif text-3xl md:text-5xl font-bold tracking-wider mb-4 text-white">THE SCENT STRUCTURE</h2>
+          <div className="w-16 h-[1px] bg-[#F5E6C8] mx-auto mb-6"></div>
+          <p className="text-white/60 text-xs md:text-sm leading-relaxed">
+            Every element is carefully composed to construct an evolvement of premium notes, locking onto skin for an exceptional and memorable sillage.
+          </p>
+        </div>
+
+        {/* 3-Tier Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 w-full items-stretch">
           
-          <div className="space-y-8">
-            <div className="border-l border-[#1FDEC3]/30 pl-6 relative scent-note">
-              <div className="absolute w-2 h-2 rounded-full bg-[#1FDEC3] -left-[4.5px] top-2"></div>
-              <h3 className="text-[#1FDEC3] text-sm tracking-[0.2em] mb-2 font-medium">TOP NOTES</h3>
-              <p className="font-serif text-xl md:text-2xl drop-shadow-md">Bergamot, Sea Salt, Lemon Zest</p>
+          {/* Card 1: Top Notes */}
+          <div className="scent-card flex flex-col p-8 bg-white/[0.02] border border-white/[0.08] backdrop-blur-xl rounded-xl shadow-[0_4px_30px_rgba(0,0,0,0.4)] relative overflow-hidden group hover:border-[#00F0FF]/30 transition-all duration-300">
+            <div className="absolute top-0 right-0 w-24 h-24 bg-[#00F0FF]/5 rounded-full blur-2xl group-hover:bg-[#00F0FF]/10 transition-all duration-300"></div>
+            
+            <div className="flex items-center justify-between mb-6">
+              <span className="text-[10px] tracking-[0.2em] font-bold text-[#00F0FF] bg-[#00F0FF]/10 px-3 py-1 rounded">01 • TOP NOTE</span>
+              <Sparkles size={16} className="text-[#00F0FF]" />
             </div>
             
-            <div className="border-l border-white/30 pl-6 relative scent-note">
-              <div className="absolute w-2 h-2 rounded-full bg-white/50 -left-[4.5px] top-2"></div>
-              <h3 className="text-white/60 text-sm tracking-[0.2em] mb-2 font-medium">HEART NOTES</h3>
-              <p className="font-serif text-xl md:text-2xl drop-shadow-md">Blue Lotus, Driftwood, Clary Sage</p>
-            </div>
+            <h3 className="font-serif text-2xl font-bold tracking-wide text-white mb-2">ELECTRIC OPENING</h3>
+            <span className="text-[11px] tracking-wider text-white/40 mb-4 block">0 – 30 MINUTES</span>
             
-            <div className="border-l border-[#D4AF37]/30 pl-6 relative scent-note">
-              <div className="absolute w-2 h-2 rounded-full bg-[#D4AF37] -left-[4.5px] top-2"></div>
-              <h3 className="text-[#D4AF37] text-sm tracking-[0.2em] mb-2 font-medium">BASE NOTES</h3>
-              <p className="font-serif text-xl md:text-2xl drop-shadow-md">Sandalwood, Ambergris, Vetiver</p>
+            <div className="w-full h-[1px] bg-white/10 mb-6"></div>
+            
+            <p className="font-serif text-lg md:text-xl text-[#F5E6C8] tracking-wide mb-6 leading-relaxed flex-grow">
+              Grapefruit, Bergamot, Italian Lemon, Pink Pepper, Saffron, Fresh Mint, Crisp Aldehydes.
+            </p>
+            
+            <div className="mt-auto bg-white/[0.01] border border-white/[0.04] p-4 rounded-lg">
+              <span className="text-[10px] tracking-widest font-bold text-white/50 block mb-1 uppercase">Sensation</span>
+              <p className="text-xs text-white/80 leading-relaxed italic">
+                An invigorating surge of ocean breeze and chilled citrus spice.
+              </p>
             </div>
           </div>
+
+          {/* Card 2: Heart Notes */}
+          <div className="scent-card flex flex-col p-8 bg-white/[0.02] border border-white/[0.08] backdrop-blur-xl rounded-xl shadow-[0_4px_30px_rgba(0,0,0,0.4)] relative overflow-hidden group hover:border-[#38BDF8]/30 transition-all duration-300">
+            <div className="absolute top-0 right-0 w-24 h-24 bg-[#38BDF8]/5 rounded-full blur-2xl group-hover:bg-[#38BDF8]/10 transition-all duration-300"></div>
+            
+            <div className="flex items-center justify-between mb-6">
+              <span className="text-[10px] tracking-[0.2em] font-bold text-[#38BDF8] bg-[#38BDF8]/10 px-3 py-1 rounded">02 • HEART NOTE</span>
+              <Heart size={16} className="text-[#38BDF8]" />
+            </div>
+            
+            <h3 className="font-serif text-2xl font-bold tracking-wide text-white mb-2">SENSUAL CORE</h3>
+            <span className="text-[11px] tracking-wider text-white/40 mb-4 block">2 – 4 HOURS</span>
+            
+            <div className="w-full h-[1px] bg-white/10 mb-6"></div>
+            
+            <p className="font-serif text-lg md:text-xl text-[#F5E6C8] tracking-wide mb-6 leading-relaxed flex-grow">
+              Warm Amber, Crushed Ginger, Nutmeg, Night-Blooming Jasmine, Crisp Melon.
+            </p>
+            
+            <div className="mt-auto bg-white/[0.01] border border-white/[0.04] p-4 rounded-lg">
+              <span className="text-[10px] tracking-widest font-bold text-white/50 block mb-1 uppercase">Sensation</span>
+              <p className="text-xs text-white/80 leading-relaxed italic">
+                Velvety warmth preventing harsh aquatic sharpness.
+              </p>
+            </div>
+          </div>
+
+          {/* Card 3: Base Notes */}
+          <div className="scent-card flex flex-col p-8 bg-white/[0.02] border border-white/[0.08] backdrop-blur-xl rounded-xl shadow-[0_4px_30px_rgba(0,0,0,0.4)] relative overflow-hidden group hover:border-[#F5E6C8]/30 transition-all duration-300">
+            <div className="absolute top-0 right-0 w-24 h-24 bg-[#F5E6C8]/5 rounded-full blur-2xl group-hover:bg-[#F5E6C8]/10 transition-all duration-300"></div>
+            
+            <div className="flex items-center justify-between mb-6">
+              <span className="text-[10px] tracking-[0.2em] font-bold text-[#F5E6C8] bg-[#F5E6C8]/10 px-3 py-1 rounded">03 • BASE NOTE</span>
+              <Anchor size={16} className="text-[#F5E6C8]" />
+            </div>
+            
+            <h3 className="font-serif text-2xl font-bold tracking-wide text-white mb-2">SIGNATURE SILLAGE</h3>
+            <span className="text-[11px] tracking-wider text-white/40 mb-4 block">6 – 8+ HOURS</span>
+            
+            <div className="w-full h-[1px] bg-white/10 mb-6"></div>
+            
+            <p className="font-serif text-lg md:text-xl text-[#F5E6C8] tracking-wide mb-6 leading-relaxed flex-grow">
+              Mysore Sandalwood, Virginia Cedar, Incense, Fir Resin, Patchouli, Labdanum.
+            </p>
+            
+            <div className="mt-auto bg-white/[0.01] border border-white/[0.04] p-4 rounded-lg">
+              <span className="text-[10px] tracking-widest font-bold text-white/50 block mb-1 uppercase">Sensation</span>
+              <p className="text-xs text-white/80 leading-relaxed italic">
+                An alluring, woody trail that locks into skin and apparel.
+              </p>
+            </div>
+          </div>
+
         </div>
         
       </div>

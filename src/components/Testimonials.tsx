@@ -3,45 +3,70 @@ import { Star } from 'lucide-react';
 
 const Testimonials: React.FC = () => {
   const reviews = [
-    { text: "Best aquatic fragrance I've used.", name: "Rahul S." },
-    { text: "Long lasting and very premium feel.", name: "Priya M." },
-    { text: "Gets me compliments every time I wear it.", name: "Aditya K." },
-    { text: "My husband loved it, luxurious packaging.", name: "Sneha P." },
-    { text: "Value for money. Smells high-end.", name: "Vikram R." },
-    { text: "Fresh, sophisticated and incredibly easy to wear.", name: "Neha G." },
-    { text: "The kind of fragrance people ask about.", name: "Karan V." },
-    { text: "My new daily signature scent.", name: "Anjali D." },
-    { text: "Perfect for Indian summers. Very refreshing.", name: "Manish T." },
-    { text: "Beautiful packaging and amazing smell.", name: "Ritu J." },
-    { text: "Lasts all day even in humid weather.", name: "Rohit B." },
-    { text: "A very balanced unisex fragrance.", name: "Pooja S." },
-    { text: "Blind buy worthy! Fantastic scent.", name: "Amit C." },
-    { text: "Smells expensive but reasonably priced.", name: "Kavita N." },
-    { text: "The sandalwood notes at the base are beautiful.", name: "Sanjay P." }
+    { text: "The opening citrus burst is incredible, but the sandalwood drydown after 4 hours is where it truly shines. Gets compliments every single day.", name: "Aarav Sharma" },
+    { text: "Incredibly long lasting! Smells like a premium high-end ocean spray. Worth every rupee.", name: "Rohan Patel" },
+    { text: "At 224 rupees, I didn't expect much, but wow! This easily competes with 5k designer perfumes.", name: "Priya Nair" },
+    { text: "Perfect unisex scent. My husband and I both use it. Sandalwood base is extremely sensual.", name: "Sneha Reddy" },
+    { text: "Delivered in 4 days. Secure packing. Smells absolutely fantastic, fresh and refreshing.", name: "Vikram Malhotra" },
+    { text: "Got 3 compliments on my first day wearing it. It's clean, marine, and very luxury.", name: "Anjali Gupta" },
+    { text: "Lasts 8+ hours easily on my clothes. Best perfume purchase of the year.", name: "Kabir Singh" },
+    { text: "Very premium heavyweight glass bottle. Mist spray is super fine. Impressive work VÖKKA.", name: "Neha Deshmukh" },
+    { text: "Perfect signature scent for Indian weather. Chilled citrus notes are beautiful.", name: "Manish Iyer" },
+    { text: "Excellent sillage. Leaves a trail that stays in the room. Fully satisfied.", name: "Aditya Joshi" },
+    { text: "The Blue Lotus and driftwood heart notes are extremely unique. Love it.", name: "Ritu Verma" },
+    { text: "Clean Aldehydes and Mint opening is so refreshing in the morning. Buying a backup bottle.", name: "Rohit Sen" },
+    { text: "Sandalwood and Amber combination is super premium. Day to night masterpiece.", name: "Pooja Kapoor" },
+    { text: "Unreal value. Direct-to-consumer pricing model is great. High concentration EDP.", name: "Amit Trivedi" },
+    { text: "I wear it to meetings and parties. Smells sophisticated and rich.", name: "Kavita Rao" }
   ];
 
-  // Duplicate for seamless infinite scrolling
   const marqueeReviews = [...reviews, ...reviews];
 
   return (
-    <section className="py-20 w-full bg-[#020C17] text-white overflow-hidden relative z-20">
+    <section className="py-24 w-full bg-[#050B14] text-white overflow-hidden relative z-20 border-t border-white/5">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 mb-16 text-center">
+        <span className="text-[#00F0FF] tracking-[0.3em] text-[10px] md:text-xs font-bold uppercase mb-4 block">SOCIAL PROOF</span>
+        
+        <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-4">
+          <h2 className="font-serif text-3xl md:text-5xl font-bold tracking-wider text-white">VERIFIED BUYERS</h2>
+          <div className="flex items-center gap-1.5 py-1 px-3 bg-white/[0.04] border border-white/[0.08] rounded-full">
+            <span className="text-sm font-bold text-[#F5E6C8]">4.2 / 5.0</span>
+            <div className="flex text-[#F5E6C8]">
+              <Star size={11} fill="currentColor" />
+              <Star size={11} fill="currentColor" />
+              <Star size={11} fill="currentColor" />
+              <Star size={11} fill="currentColor" />
+              <Star size={11} className="opacity-40" />
+            </div>
+          </div>
+        </div>
+        <p className="text-white/50 text-xs md:text-sm max-w-xl mx-auto">
+          Over 21,300+ customers have experienced the luxury of VÖKKA Thai Aqua.
+        </p>
+      </div>
+
       <div className="w-full relative overflow-hidden">
-        {/* Shadow overlays for fading effect at edges */}
-        <div className="absolute top-0 bottom-0 left-0 w-24 bg-gradient-to-r from-[#020C17] to-transparent z-10 pointer-events-none"></div>
-        <div className="absolute top-0 bottom-0 right-0 w-24 bg-gradient-to-l from-[#020C17] to-transparent z-10 pointer-events-none"></div>
+        {/* Shadow overlays for fading effect */}
+        <div className="absolute top-0 bottom-0 left-0 w-24 bg-gradient-to-r from-[#050B14] to-transparent z-10 pointer-events-none"></div>
+        <div className="absolute top-0 bottom-0 right-0 w-24 bg-gradient-to-l from-[#050B14] to-transparent z-10 pointer-events-none"></div>
         
         <div className="flex animate-marquee hover:[animation-play-state:paused] w-max gap-6 px-6">
           {marqueeReviews.map((review, i) => (
-            <div key={i} className="flex flex-col flex-shrink-0 w-80 p-6 bg-[#020C17]/40 backdrop-blur-md rounded-xl border border-white/10 shadow-2xl">
-              <div className="flex gap-1 mb-4 text-[#D4AF37]">
+            <div key={i} className="flex flex-col flex-shrink-0 w-80 p-6 bg-white/[0.02] backdrop-blur-xl border border-white/[0.08] rounded-xl shadow-[0_4px_30px_rgba(0,0,0,0.3)]">
+              <div className="flex gap-1 mb-4 text-[#F5E6C8]">
                 <Star size={12} fill="currentColor" />
                 <Star size={12} fill="currentColor" />
                 <Star size={12} fill="currentColor" />
                 <Star size={12} fill="currentColor" />
                 <Star size={12} fill="currentColor" />
               </div>
-              <p className="font-serif text-lg text-white/90 italic mb-4 flex-grow">"{review.text}"</p>
-              <p className="text-xs font-medium tracking-wider text-[#1FDEC3] uppercase">— {review.name}</p>
+              <p className="font-light text-xs md:text-sm text-white/80 leading-relaxed mb-6 flex-grow">"{review.text}"</p>
+              <div className="flex items-center gap-2">
+                <div className="w-6 h-6 rounded-full bg-[#00F0FF]/15 flex items-center justify-center text-[10px] text-[#00F0FF] font-bold">
+                  {review.name.charAt(0)}
+                </div>
+                <p className="text-[10px] font-bold tracking-wider text-[#38BDF8] uppercase">{review.name} <span className="text-[8px] text-white/30 font-normal lowercase">(verified)</span></p>
+              </div>
             </div>
           ))}
         </div>

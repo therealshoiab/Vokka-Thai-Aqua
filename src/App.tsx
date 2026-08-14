@@ -6,6 +6,7 @@ import ProductSequence from './components/ProductSequence';
 import Hero from './components/Hero';
 import ScentNotes from './components/ScentNotes';
 import Reveal from './components/Reveal';
+import ProductDetails from './components/ProductDetails';
 import Pricing from './components/Pricing';
 import Testimonials from './components/Testimonials';
 import FinalCTA from './components/FinalCTA';
@@ -20,6 +21,7 @@ gsap.registerPlugin(ScrollTrigger);
 function App() {
   const { progress, isInitialLoaded, loadedImages } = usePreloader();
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+  const [selectedQuantity, setSelectedQuantity] = useState(1);
 
   useEffect(() => {
     if (isInitialLoaded) {
@@ -29,30 +31,38 @@ function App() {
     }
   }, [isInitialLoaded]);
 
-  const openCheckout = () => setIsCheckoutOpen(true);
+  const openCheckout = (quantity: number = 1) => {
+    setSelectedQuantity(quantity);
+    setIsCheckoutOpen(true);
+  };
 
   return (
     <SmoothScroll>
-      <div className="min-h-screen text-white font-sans selection:bg-[#1FDEC3] selection:text-[#020C17] overflow-x-hidden">
+      <div className="min-h-screen text-white font-sans selection:bg-[#00F0FF] selection:text-[#050B14] overflow-x-hidden bg-[#050B14]">
         {!isInitialLoaded && <Preloader progress={progress} />}
         
-        <Navbar onShopClick={openCheckout} />
+        <Navbar onShopClick={() => openCheckout(1)} />
         
         <div id="main-scroll-container" className="relative w-full">
           {isInitialLoaded && <ProductSequence images={loadedImages} />}
           
           <div className="relative z-10 w-full overflow-x-hidden">
-            <Hero onBuyClick={openCheckout} />
+            <Hero onBuyClick={() => openCheckout(1)} />
             <ScentNotes />
             <Reveal />
-            <Pricing onBuyClick={openCheckout} />
+            <ProductDetails />
+            <Pricing onBuyClick={(qty) => openCheckout(qty)} />
             <Testimonials />
-            <FinalCTA onBuyClick={openCheckout} />
+            <FinalCTA onBuyClick={() => openCheckout(1)} />
             <Footer />
           </div>
         </div>
 
-        <CheckoutModal isOpen={isCheckoutOpen} onClose={() => setIsCheckoutOpen(false)} />
+        <CheckoutModal 
+          isOpen={isCheckoutOpen} 
+          onClose={() => setIsCheckoutOpen(false)} 
+          initialQuantity={selectedQuantity}
+        />
       </div>
     </SmoothScroll>
   );

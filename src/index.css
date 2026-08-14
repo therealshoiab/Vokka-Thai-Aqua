@@ -1,10 +1,11 @@
 @import "tailwindcss";
 
 @theme {
-  --color-vokka-deep-blue: #020C17;
-  --color-vokka-aqua: #0089A7;
-  --color-vokka-turquoise: #1FDEC3;
-  --color-vokka-gold: #D4AF37;
+  --color-vokka-deep-blue: #050B14;
+  --color-vokka-obsidian: #0A1320;
+  --color-vokka-aqua: #00F0FF;
+  --color-vokka-sky: #38BDF8;
+  --color-vokka-gold: #F5E6C8;
   --color-vokka-ivory: #FFFFF0;
 }
 
@@ -12,14 +13,14 @@
   body {
     background-color: var(--color-vokka-deep-blue);
     color: var(--color-vokka-ivory);
-    font-family: 'Inter', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6, .font-serif {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cinzel', serif;
   }
 }
 

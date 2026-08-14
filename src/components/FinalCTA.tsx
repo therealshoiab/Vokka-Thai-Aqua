@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { splitTextReveal } from '../utils/animations';
 import { useMagnetic } from '../hooks/useMagnetic';
+import { ShoppingCart } from 'lucide-react';
 
 interface FinalCTAProps {
   onBuyClick?: () => void;
@@ -35,16 +36,20 @@ const FinalCTA: React.FC<FinalCTAProps> = ({ onBuyClick }) => {
   }, []);
 
   return (
-    <section ref={containerRef} className="h-[70vh] min-h-[500px] w-full flex flex-col items-center justify-center text-white relative z-20 bg-gradient-to-t from-[#01060B] to-transparent pointer-events-auto border-t border-white/5">
-      <div className="text-center z-10 px-6 w-full">
-        <h2 ref={titleRef} className="invisible font-serif text-[clamp(2.5rem,8vw,4.5rem)] md:text-7xl mb-4 tracking-wide drop-shadow-2xl leading-tight">MAKE THEM<br/>REMEMBER YOU.</h2>
-        <p className="text-[10px] md:text-xs tracking-[0.4em] text-[#1FDEC3] mb-10 font-medium">VÖKKA THAI AQUA</p>
+    <section ref={containerRef} className="h-[70vh] min-h-[500px] w-full flex flex-col items-center justify-center text-white relative z-20 bg-gradient-to-t from-[#050B14] via-[#0A1320]/60 to-transparent pointer-events-auto border-t border-white/5">
+      <div className="text-center z-10 px-6 w-full max-w-4xl mx-auto">
+        <h2 ref={titleRef} className="invisible font-serif text-[clamp(2.5rem,8vw,4.5rem)] md:text-7xl mb-4 font-bold tracking-wider drop-shadow-2xl leading-tight">
+          MAKE THEM<br />
+          <span className="bg-gradient-to-r from-[#F5E6C8] to-[#00F0FF] bg-clip-text text-transparent">REMEMBER YOU.</span>
+        </h2>
+        <p className="text-[10px] md:text-xs tracking-[0.4em] text-[#38BDF8] mb-10 font-bold uppercase">✦ VÖKKA THAI AQUA ✦</p>
         <button 
           ref={btnRef}
           onClick={onBuyClick}
-          className="opacity-0 bg-white text-[#020C17] hover:bg-[#1FDEC3] transition-colors py-4 px-12 tracking-widest text-sm font-medium rounded-sm shadow-xl hover:shadow-[#1FDEC3]/20 w-full max-w-[280px]"
+          className="opacity-0 bg-[#00F0FF] text-[#050B14] hover:bg-white hover:text-[#050B14] transition-all duration-300 py-4.5 px-12 tracking-[0.2em] text-xs font-extrabold rounded-sm shadow-[0_0_30px_rgba(0,240,255,0.25)] hover:shadow-[0_0_40px_rgba(255,255,255,0.35)] w-full max-w-[320px] flex items-center justify-center gap-2.5 mx-auto"
         >
-          SHOP NOW
+          <ShoppingCart size={14} />
+          ORDER VIA WHATSAPP
         </button>
       </div>
     </section>
