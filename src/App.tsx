@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { usePreloader } from './hooks/usePreloader';
-import Preloader from './components/Preloader';
 import Navbar from './components/Navbar';
 import ProductSequence from './components/ProductSequence';
 import Hero from './components/Hero';
@@ -19,7 +18,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 function App() {
-  const { progress, isInitialLoaded, loadedImages } = usePreloader();
+  const { isInitialLoaded, loadedImages } = usePreloader();
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [selectedQuantity, setSelectedQuantity] = useState(1);
 
@@ -38,8 +37,7 @@ function App() {
 
   return (
     <SmoothScroll>
-      <div className="min-h-screen text-white font-sans selection:bg-[#00F0FF] selection:text-[#050B14] overflow-x-hidden bg-[#050B14]">
-        {!isInitialLoaded && <Preloader progress={progress} />}
+      <div className="min-h-screen text-white font-sans selection:bg-[#D4AF37] selection:text-[#050B14] overflow-x-hidden bg-[#050B14]">
         
         <Navbar onShopClick={() => openCheckout(1)} />
         

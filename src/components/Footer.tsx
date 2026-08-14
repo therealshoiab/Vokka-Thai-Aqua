@@ -6,22 +6,22 @@ const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-12 mb-16">
         
         <div>
-          <h2 className="font-serif text-3xl font-bold tracking-[0.2em] mb-6 text-[#F5E6C8]">VÖKKA</h2>
-          <p className="text-xs md:text-sm tracking-wider text-white/50 max-w-sm leading-relaxed">
+          <h2 className="font-serif text-3xl font-bold tracking-[0.2em] mb-6 text-[#D4AF37]">VÖKKA</h2>
+          <p className="text-sm tracking-wider text-white/50 max-w-sm leading-relaxed">
             Luxury fragrances inspired by the power and purity of water. Specially formulated for long-lasting sillage.
           </p>
         </div>
         
         <div className="flex gap-16">
-          <div className="flex flex-col space-y-4 text-xs md:text-sm tracking-wider text-white/70">
-            <a href="#hero" className="hover:text-[#00F0FF] transition-colors">HOME</a>
-            <a href="#notes" className="hover:text-[#00F0FF] transition-colors">NOTES</a>
-            <a href="#pricing" className="hover:text-[#00F0FF] transition-colors">PRICING</a>
+          <div className="flex flex-col space-y-4 text-xs tracking-wider text-white/70">
+            <a href="#hero" className="hover:text-[#D4AF37] transition-colors">HOME</a>
+            <a href="#notes" className="hover:text-[#D4AF37] transition-colors">NOTES</a>
+            <a href="#pricing" className="hover:text-[#D4AF37] transition-colors">PRICING</a>
           </div>
           
-          <div className="flex flex-col space-y-4 text-xs md:text-sm tracking-wider text-white/70">
-            <a href="#details" className="hover:text-[#00F0FF] transition-colors">SPECIFICATIONS</a>
-            <a href="#" className="hover:text-[#00F0FF] transition-colors">SUPPORT</a>
+          <div className="flex flex-col space-y-4 text-xs tracking-wider text-white/70">
+            <a href="#details" className="hover:text-[#D4AF37] transition-colors">SPECIFICATIONS</a>
+            <a href="#" className="hover:text-[#D4AF37] transition-colors">SUPPORT</a>
           </div>
         </div>
         

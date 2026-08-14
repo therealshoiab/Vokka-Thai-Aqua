@@ -25,13 +25,13 @@ const Testimonials: React.FC = () => {
   return (
     <section className="py-24 w-full bg-white/[0.01] border-b border-white/[0.06] backdrop-blur-sm text-white overflow-hidden relative z-20">
       <div className="max-w-7xl mx-auto px-6 md:px-12 mb-16 text-center">
-        <span className="text-[#00F0FF] tracking-[0.3em] text-[10px] md:text-xs font-bold uppercase mb-4 block text-shadow-premium">SOCIAL PROOF</span>
+        <span className="text-[#D4AF37] tracking-[0.3em] text-[10px] md:text-xs font-bold uppercase mb-4 block">SOCIAL PROOF</span>
         
         <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-4">
           <h2 className="font-serif text-3xl md:text-5xl font-bold tracking-wider text-white text-shadow-premium">VERIFIED BUYERS</h2>
           <div className="flex items-center gap-1.5 py-1 px-3 bg-white/[0.04] border border-white/[0.08] rounded-full backdrop-blur-md">
-            <span className="text-sm font-bold text-[#F5E6C8]">4.2 / 5.0</span>
-            <div className="flex text-[#F5E6C8]">
+            <span className="text-sm font-bold text-[#D4AF37]">4.2 / 5.0</span>
+            <div className="flex text-[#D4AF37]">
               <Star size={11} fill="currentColor" />
               <Star size={11} fill="currentColor" />
               <Star size={11} fill="currentColor" />
@@ -40,32 +40,32 @@ const Testimonials: React.FC = () => {
             </div>
           </div>
         </div>
-        <p className="text-white/70 text-xs md:text-sm max-w-xl mx-auto text-shadow-premium font-medium">
+        <p className="text-white/70 text-xs md:text-sm max-w-xl mx-auto font-semibold">
           Over 21,300+ customers have experienced the luxury of VÖKKA Thai Aqua.
         </p>
       </div>
 
       <div className="w-full relative overflow-hidden">
-        {/* Shadow overlays for fading effect */}
+        {/* Shadow overlays */}
         <div className="absolute top-0 bottom-0 left-0 w-24 bg-gradient-to-r from-[#050B14]/80 to-transparent z-10 pointer-events-none"></div>
         <div className="absolute top-0 bottom-0 right-0 w-24 bg-gradient-to-l from-[#050B14]/80 to-transparent z-10 pointer-events-none"></div>
         
         <div className="flex animate-marquee hover:[animation-play-state:paused] w-max gap-6 px-6">
           {marqueeReviews.map((review, i) => (
             <div key={i} className="flex flex-col flex-shrink-0 w-80 p-6 bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-xl shadow-[0_4px_30px_rgba(0,0,0,0.3)]">
-              <div className="flex gap-1 mb-4 text-[#F5E6C8]">
+              <div className="flex gap-1 mb-4 text-[#D4AF37]">
                 <Star size={12} fill="currentColor" />
                 <Star size={12} fill="currentColor" />
                 <Star size={12} fill="currentColor" />
                 <Star size={12} fill="currentColor" />
                 <Star size={12} fill="currentColor" />
               </div>
-              <p className="font-medium text-xs md:text-sm text-white/90 leading-relaxed mb-6 flex-grow text-shadow-premium">"{review.text}"</p>
+              <p className="font-medium text-xs md:text-sm text-white/90 leading-relaxed mb-6 flex-grow">"{review.text}"</p>
               <div className="flex items-center gap-2">
-                <div className="w-6 h-6 rounded-full bg-[#00F0FF]/15 flex items-center justify-center text-[10px] text-[#00F0FF] font-bold">
+                <div className="w-6 h-6 rounded-full bg-[#D4AF37]/15 flex items-center justify-center text-[10px] text-[#D4AF37] font-bold">
                   {review.name.charAt(0)}
                 </div>
-                <p className="text-[10px] font-bold tracking-wider text-[#38BDF8] uppercase text-shadow-premium">{review.name} <span className="text-[8px] text-white/30 font-normal lowercase">(verified)</span></p>
+                <p className="text-[10px] font-bold tracking-wider text-[#D4AF37] uppercase">{review.name} <span className="text-[8px] text-white/30 font-normal lowercase">(verified)</span></p>
               </div>
             </div>
           ))}

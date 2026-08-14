@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { splitTextReveal } from '../utils/animations';
+import SplitType from 'split-type';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,31 +13,78 @@ const Reveal: React.FC = () => {
   useEffect(() => {
     if (!containerRef.current || !text1Ref.current || !text2Ref.current) return;
     
-    // Hide initially to prevent flash
+    // Split text into characters
+    const text1 = new SplitType(text1Ref.current, { types: 'chars,words' });
+    const text2 = new SplitType(text2Ref.current, { types: 'chars,words' });
+
+    // Initial state: hide characters and make headings visible
     gsap.set([text1Ref.current, text2Ref.current], { visibility: 'visible' });
+    gsap.set(text1.chars, {
+      y: 50,
+      opacity: 0,
+      filter: 'blur(10px)',
+      scale: 0.9
+    });
+    gsap.set(text2.chars, {
+      y: 50,
+      opacity: 0,
+      filter: 'blur(10px)',
+      scale: 0.9
+    });
 
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: containerRef.current,
         start: "top center",
-        end: "+=150%", // Keep the longer scroll distance requested earlier
-        scrub: 1.5, // Smoother scrub for luxury feel
+        end: "+=180%", // Keep scroll distance comfortable
+        scrub: 1.5,
         pin: true,
       }
     });
 
-    // Reveal first line
-    tl.add(() => splitTextReveal(text1Ref.current!, { duration: 1.5, stagger: 0.08 }))
-      .to({}, { duration: 2 }) // hold
-      .to(text1Ref.current, { opacity: 0, y: -20, duration: 1, filter: 'blur(5px)' });
-
-    // Reveal second line
-    tl.add(() => splitTextReveal(text2Ref.current!, { duration: 1.5, stagger: 0.08 }))
-      .to({}, { duration: 3 }) // hold longer
-      .to(text2Ref.current, { opacity: 0, scale: 1.1, duration: 1.5, filter: 'blur(10px)' });
+    // Reveal first line directly in the timeline (ensures proper scrubbing)
+    tl.to(text1.chars, {
+      y: 0,
+      opacity: 1,
+      filter: 'blur(0px)',
+      scale: 1,
+      stagger: 0.05,
+      duration: 1.2,
+      ease: 'power3.out'
+    })
+    .to({}, { duration: 1.5 }) // Hold
+    .to(text1.chars, {
+      opacity: 0,
+      y: -30,
+      filter: 'blur(8px)',
+      duration: 1,
+      stagger: 0.02,
+      ease: 'power2.in'
+    })
+    // Reveal second line directly in the timeline
+    .to(text2.chars, {
+      y: 0,
+      opacity: 1,
+      filter: 'blur(0px)',
+      scale: 1,
+      stagger: 0.05,
+      duration: 1.2,
+      ease: 'power3.out'
+    })
+    .to({}, { duration: 2 }) // Hold longer
+    .to(text2.chars, {
+      opacity: 0,
+      scale: 1.15,
+      filter: 'blur(12px)',
+      duration: 1.2,
+      stagger: 0.02,
+      ease: 'power2.out'
+    });
 
     return () => {
       tl.kill();
+      text1.revert();
+      text2.revert();
       ScrollTrigger.getAll().forEach(st => {
         if (st.trigger === containerRef.current) st.kill();
       });
@@ -45,15 +92,14 @@ const Reveal: React.FC = () => {
   }, []);
 
   return (
-    <section ref={containerRef} className="h-screen w-full flex items-center justify-center relative z-10 pointer-events-none px-4">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#01060B]/60 to-transparent"></div>
-      
+    <section ref={containerRef} className="h-screen w-full flex items-center justify-center relative z-10 pointer-events-none px-4 bg-transparent">
+      {/* No dark gradient overlays here to allow clean bottle scroll */}
       <div className="relative z-20 flex flex-col items-center justify-center text-center">
-        <h2 ref={text1Ref} className="invisible font-serif text-[clamp(2.5rem,8vw,5rem)] text-white tracking-widest drop-shadow-2xl absolute w-full max-w-4xl px-4">
+        <h2 ref={text1Ref} className="invisible font-serif text-[clamp(2.2rem,7vw,4.5rem)] text-white font-bold tracking-widest text-shadow-premium absolute w-full max-w-4xl px-4 leading-none">
           EVERY DETAIL MATTERS.
         </h2>
         
-        <h2 ref={text2Ref} className="invisible font-serif text-[clamp(2.5rem,8vw,5rem)] text-white tracking-widest drop-shadow-2xl absolute w-full max-w-4xl px-4 leading-tight">
+        <h2 ref={text2Ref} className="invisible font-serif text-[clamp(2.2rem,7vw,4.5rem)] text-white font-bold tracking-widest text-shadow-premium absolute w-full max-w-4xl px-4 leading-tight">
           CRAFTED TO BE<br/>
           <span className="text-[#D4AF37]">REMEMBERED.</span>
         </h2>

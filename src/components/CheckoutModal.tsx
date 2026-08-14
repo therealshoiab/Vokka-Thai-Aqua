@@ -19,36 +19,27 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, initialQ
     paymentPreference: 'Cash on Delivery (COD)'
   });
 
-  // Keep quantity in sync with initialQuantity prop when modal opens
   useEffect(() => {
-    if (isOpen) {
-      setQuantity(initialQuantity);
-    }
+    if (isOpen) setQuantity(initialQuantity);
   }, [isOpen, initialQuantity]);
 
   if (!isOpen) return null;
 
-  // Pricing logic
   const getPrice = (qty: number) => {
     if (qty === 1) return 600;
     if (qty === 2) return 1080;
     if (qty === 3) return 1440;
-    return qty * 480; // Fallback
+    return qty * 480;
   };
 
   const totalPrice = getPrice(quantity);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    // Validations
     if (!/^\d{10}$/.test(formData.phone)) {
       alert("Please enter a valid 10-digit mobile number.");
       return;
@@ -58,7 +49,6 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, initialQ
       return;
     }
 
-    // Construct WhatsApp message
     const message = `🛍️ *NEW ORDER: VÖKKA THAI AQUA 100ML*
 ----------------------------------
 👤 *Customer Name:* ${formData.name}
@@ -73,10 +63,7 @@ ${formData.city}, ${formData.state} - ${formData.pincode}
 ----------------------------------
 Please confirm my order.`;
 
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/917780938743?text=${encodedMessage}`;
-
-    window.open(whatsappUrl, '_blank');
+    window.open(`https://wa.me/917780938743?text=${encodeURIComponent(message)}`, '_blank');
     onClose();
   };
 
@@ -89,7 +76,7 @@ Please confirm my order.`;
         {/* Header */}
         <div className="flex justify-between items-center p-6 border-b border-white/[0.08] bg-white/[0.02]">
           <div className="flex items-center gap-2">
-            <ShoppingCart size={18} className="text-[#00F0FF]" />
+            <ShoppingCart size={18} className="text-[#D4AF37]" />
             <h2 className="font-serif text-lg font-bold tracking-widest text-[#F5E6C8]">ORDER DETAILS</h2>
           </div>
           <button onClick={onClose} className="text-white/50 hover:text-white transition-colors">
@@ -97,17 +84,17 @@ Please confirm my order.`;
           </button>
         </div>
         
-        {/* Form Container (Scrollable) */}
-        <div className="overflow-y-auto p-6 space-y-6 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
+        {/* Scrollable Form */}
+        <div className="overflow-y-auto p-6 space-y-6">
           
-          {/* Order Summary Card */}
+          {/* Order Summary */}
           <div className="p-5 bg-white/[0.02] border border-white/[0.06] rounded-lg space-y-4">
             <div className="flex justify-between items-start">
               <div>
                 <h3 className="font-serif text-sm font-bold text-white tracking-wider">VÖKKA Thai Aqua EDP (100ml)</h3>
                 <p className="text-[10px] text-white/40 tracking-widest uppercase mt-1">Premium Unisex Formulation</p>
               </div>
-              <span className="text-[#00F0FF] text-lg font-serif font-bold">₹{totalPrice}</span>
+              <span className="text-[#D4AF37] text-lg font-serif font-bold">₹{totalPrice}</span>
             </div>
             
             <div className="flex items-center justify-between pt-3 border-t border-white/[0.06]">
@@ -120,7 +107,7 @@ Please confirm my order.`;
                     onClick={() => setQuantity(qty)}
                     className={`w-10 h-10 rounded-sm font-serif text-xs font-bold transition-all ${
                       quantity === qty
-                        ? 'bg-[#00F0FF] text-[#050B14] shadow-[0_0_15px_rgba(0,240,255,0.2)]'
+                        ? 'bg-[#D4AF37] text-[#050B14] shadow-[0_0_15px_rgba(212,175,55,0.2)]'
                         : 'bg-white/5 border border-white/10 text-white hover:bg-white/10'
                     }`}
                   >
@@ -133,88 +120,58 @@ Please confirm my order.`;
           
           {/* Form */}
           <form id="checkout-form" onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label className="text-[10px] tracking-widest text-white/50 uppercase block mb-1.5 font-bold">Full Name *</label>
-              <input 
-                type="text" 
-                name="name" 
-                placeholder="Enter your name" 
-                required
-                value={formData.name}
-                onChange={handleChange}
-                className="w-full bg-white/[0.03] border border-white/[0.1] rounded-sm px-4 py-3 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-[#00F0FF] transition-colors"
-              />
-            </div>
-            
-            <div>
-              <label className="text-[10px] tracking-widest text-white/50 uppercase block mb-1.5 font-bold">Mobile Number *</label>
-              <input 
-                type="tel" 
-                name="phone" 
-                placeholder="10-digit mobile number" 
-                required
-                pattern="\d{10}"
-                maxLength={10}
-                value={formData.phone}
-                onChange={handleChange}
-                className="w-full bg-white/[0.03] border border-white/[0.1] rounded-sm px-4 py-3 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-[#00F0FF] transition-colors"
-              />
-            </div>
-            
-            <div>
-              <label className="text-[10px] tracking-widest text-white/50 uppercase block mb-1.5 font-bold">Delivery Address *</label>
-              <input 
-                type="text" 
-                name="address" 
-                placeholder="House/Flat No, Street Name, Landmark" 
-                required
-                value={formData.address}
-                onChange={handleChange}
-                className="w-full bg-white/[0.03] border border-white/[0.1] rounded-sm px-4 py-3 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-[#00F0FF] transition-colors"
-              />
-            </div>
+            {[
+              { label: 'Full Name', name: 'name', placeholder: 'Enter your name', type: 'text' },
+              { label: 'Mobile Number', name: 'phone', placeholder: '10-digit mobile number', type: 'tel', maxLength: 10 },
+              { label: 'Delivery Address', name: 'address', placeholder: 'House/Flat No, Street Name, Landmark', type: 'text' },
+            ].map((field) => (
+              <div key={field.name}>
+                <label className="text-[10px] tracking-widest text-white/50 uppercase block mb-1.5 font-bold">{field.label} *</label>
+                <input 
+                  type={field.type}
+                  name={field.name}
+                  placeholder={field.placeholder}
+                  required
+                  maxLength={field.maxLength}
+                  value={(formData as any)[field.name]}
+                  onChange={handleChange}
+                  className="w-full bg-white/[0.03] border border-white/[0.1] rounded-sm px-4 py-3 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-[#D4AF37] transition-colors"
+                />
+              </div>
+            ))}
             
             <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="text-[10px] tracking-widest text-white/50 uppercase block mb-1.5 font-bold">City *</label>
-                <input 
-                  type="text" 
-                  name="city" 
-                  placeholder="City" 
-                  required
-                  value={formData.city}
-                  onChange={handleChange}
-                  className="w-full bg-white/[0.03] border border-white/[0.1] rounded-sm px-4 py-3 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-[#00F0FF] transition-colors"
-                />
-              </div>
-              
-              <div>
-                <label className="text-[10px] tracking-widest text-white/50 uppercase block mb-1.5 font-bold">State *</label>
-                <input 
-                  type="text" 
-                  name="state" 
-                  placeholder="State" 
-                  required
-                  value={formData.state}
-                  onChange={handleChange}
-                  className="w-full bg-white/[0.03] border border-white/[0.1] rounded-sm px-4 py-3 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-[#00F0FF] transition-colors"
-                />
-              </div>
+              {[
+                { label: 'City', name: 'city', placeholder: 'City' },
+                { label: 'State', name: 'state', placeholder: 'State' },
+              ].map((field) => (
+                <div key={field.name}>
+                  <label className="text-[10px] tracking-widest text-white/50 uppercase block mb-1.5 font-bold">{field.label} *</label>
+                  <input 
+                    type="text"
+                    name={field.name}
+                    placeholder={field.placeholder}
+                    required
+                    value={(formData as any)[field.name]}
+                    onChange={handleChange}
+                    className="w-full bg-white/[0.03] border border-white/[0.1] rounded-sm px-4 py-3 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-[#D4AF37] transition-colors"
+                  />
+                </div>
+              ))}
             </div>
             
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="text-[10px] tracking-widest text-white/50 uppercase block mb-1.5 font-bold">Pincode *</label>
                 <input 
-                  type="text" 
-                  name="pincode" 
-                  placeholder="6-digit pincode" 
+                  type="text"
+                  name="pincode"
+                  placeholder="6-digit pincode"
                   required
-                  pattern="\d{6}"
                   maxLength={6}
                   value={formData.pincode}
                   onChange={handleChange}
-                  className="w-full bg-white/[0.03] border border-white/[0.1] rounded-sm px-4 py-3 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-[#00F0FF] transition-colors"
+                  className="w-full bg-white/[0.03] border border-white/[0.1] rounded-sm px-4 py-3 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-[#D4AF37] transition-colors"
                 />
               </div>
               
@@ -224,7 +181,7 @@ Please confirm my order.`;
                   name="paymentPreference"
                   value={formData.paymentPreference}
                   onChange={handleChange}
-                  className="w-full bg-[#050B14] border border-white/[0.1] rounded-sm px-3 py-3 text-sm text-white focus:outline-none focus:border-[#00F0FF] transition-colors"
+                  className="w-full bg-[#050B14] border border-white/[0.1] rounded-sm px-3 py-3 text-sm text-white focus:outline-none focus:border-[#D4AF37] transition-colors"
                 >
                   <option value="Cash on Delivery (COD)">Cash on Delivery (COD)</option>
                   <option value="UPI / Online on Delivery">UPI / Online on Delivery</option>
@@ -239,12 +196,12 @@ Please confirm my order.`;
           <button 
             type="submit" 
             form="checkout-form"
-            className="w-full bg-[#00F0FF] text-[#050B14] hover:bg-white hover:text-[#050B14] transition-all duration-300 py-4 px-8 tracking-[0.15em] text-xs font-extrabold rounded-sm shadow-[0_0_20px_rgba(0,240,255,0.15)] flex items-center justify-center gap-2"
+            className="w-full bg-[#D4AF37] text-[#050B14] hover:bg-white hover:text-[#050B14] transition-all duration-300 py-4 px-8 tracking-[0.15em] text-xs font-extrabold rounded-sm shadow-[0_0_20px_rgba(212,175,55,0.15)] flex items-center justify-center gap-2"
           >
             CONFIRM ORDER VIA WHATSAPP
           </button>
           <div className="flex items-center justify-center gap-1.5 text-[9px] text-white/40 tracking-wider">
-            <ShieldCheck size={11} className="text-[#00F0FF]" />
+            <ShieldCheck size={11} className="text-[#D4AF37]" />
             <span>SECURE DIRECT ORDER • FAST DESPATCH</span>
           </div>
         </div>
