@@ -1,42 +1,21 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const ProductGallery: React.FC = () => {
-  const [activeTab, setActiveTab] = useState(0);
   const containerRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
-  const showcaseRef = useRef<HTMLDivElement>(null);
-  const thumbnailsRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const images = [
-    {
-      src: `${import.meta.env.BASE_URL}gallery/1.jpg`,
-      title: "THE MONOLITH",
-      desc: "VÖKKA Thai Aqua resting on a reflective obsidian pedestal."
-    },
-    {
-      src: `${import.meta.env.BASE_URL}gallery/2.jpg`,
-      title: "VANITY OASIS",
-      desc: "Designed to elevate premium marble countertops."
-    },
-    {
-      src: `${import.meta.env.BASE_URL}gallery/3.jpg`,
-      title: "SEA BREEZE",
-      desc: "Pure marine freshness set against the azure Andaman horizon."
-    },
-    {
-      src: `${import.meta.env.BASE_URL}gallery/4.jpg`,
-      title: "TROPICAL RITUAL",
-      desc: "Chilled infinity pool reflections highlighting the warm saffron notes."
-    },
-    {
-      src: `${import.meta.env.BASE_URL}gallery/5.jpg`,
-      title: "AQUATIC RUSH",
-      desc: "Raw, energetic water splashes capturing the signature clean aldehydes."
-    }
+    { src: `${import.meta.env.BASE_URL}gallery/1.jpg`, label: "SCENE 01" },
+    { src: `${import.meta.env.BASE_URL}gallery/2.jpg`, label: "SCENE 02" },
+    { src: `${import.meta.env.BASE_URL}gallery/3.jpg`, label: "SCENE 03" },
+    { src: `${import.meta.env.BASE_URL}gallery/4.jpg`, label: "SCENE 04" },
+    { src: `${import.meta.env.BASE_URL}gallery/5.jpg`, label: "SCENE 05" }
   ];
 
   useEffect(() => {
@@ -57,142 +36,95 @@ const ProductGallery: React.FC = () => {
       }
     );
 
-    // Showcase & Thumbnails scroll animation
-    gsap.fromTo([showcaseRef.current, thumbnailsRef.current],
-      { opacity: 0, y: 50 },
+    // Scroll container entry
+    gsap.fromTo(scrollContainerRef.current,
+      { opacity: 0, y: 40 },
       {
         scrollTrigger: {
-          trigger: showcaseRef.current,
+          trigger: scrollContainerRef.current,
           start: "top 80%",
         },
         opacity: 1,
         y: 0,
-        duration: 1,
-        stagger: 0.15,
+        duration: 1.2,
         ease: "power3.out"
       }
     );
   }, []);
 
-  // Fade out/in showcase image on transition
-  const handleTabChange = (index: number) => {
-    if (activeTab === index) return;
-    
-    const tl = gsap.timeline();
-    tl.to(".gallery-showcase-img", {
-      opacity: 0,
-      scale: 0.98,
-      duration: 0.3,
-      onComplete: () => {
-        setActiveTab(index);
-      }
-    });
-    tl.to(".gallery-showcase-img", {
-      opacity: 1,
-      scale: 1,
-      duration: 0.6,
-      ease: "power2.out"
-    });
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({
+        left: -window.innerWidth * 0.4,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({
+        left: window.innerWidth * 0.4,
+        behavior: 'smooth'
+      });
+    }
   };
 
   return (
-    <section ref={containerRef} className="py-24 w-full bg-[#050B14] text-white z-20 relative pointer-events-auto border-t border-white/[0.05]">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col items-center">
+    <section ref={containerRef} className="py-24 w-full bg-[#050B14] text-white z-20 relative pointer-events-auto border-t border-white/[0.05] overflow-hidden">
+      
+      {/* Title Block - Only Eyebrow and Headline (No descriptions) */}
+      <div ref={titleRef} className="text-center max-w-2xl mx-auto mb-16 px-6">
+        <span className="text-[#D4AF37] tracking-[0.3em] text-[10px] md:text-xs font-bold uppercase mb-4 block animate-pulse">VISUAL CAMPAIGN</span>
+        <h2 className="font-serif text-3xl md:text-5xl font-bold tracking-wider text-white">THAI AQUA IN FOCUS</h2>
+        <div className="w-12 h-[1px] bg-[#D4AF37] mx-auto mt-6"></div>
+      </div>
+
+      {/* Interactive Carousel Wrapper */}
+      <div className="relative w-full px-4 md:px-12">
         
-        {/* Title Block */}
-        <div ref={titleRef} className="text-center max-w-2xl mb-16">
-          <span className="text-[#D4AF37] tracking-[0.3em] text-[10px] md:text-xs font-bold uppercase mb-3 block">VISUAL CAMPAIGN</span>
-          <h2 className="font-serif text-3xl md:text-5xl font-bold tracking-wider mb-4 text-shadow-premium">THAI AQUA IN FOCUS</h2>
-          <div className="w-12 h-[1px] bg-[#D4AF37] mx-auto mb-6"></div>
-          <p className="text-white/70 text-xs md:text-sm leading-relaxed max-w-xl mx-auto font-medium">
-            Explore the luxury bottle design of VÖKKA Thai Aqua in its natural element. Premium heavy-molded glass crowned with a champagne-knurled gold cap.
-          </p>
-        </div>
+        {/* Navigation Arrows - Desktop Only */}
+        <button 
+          onClick={scrollLeft}
+          className="absolute left-6 top-1/2 transform -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-[#050B14]/80 border border-white/10 hover:border-[#D4AF37] hover:text-[#D4AF37] flex items-center justify-center transition-all backdrop-blur-md hidden md:flex"
+        >
+          <ChevronLeft size={20} />
+        </button>
+        <button 
+          onClick={scrollRight}
+          className="absolute right-6 top-1/2 transform -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-[#050B14]/80 border border-white/10 hover:border-[#D4AF37] hover:text-[#D4AF37] flex items-center justify-center transition-all backdrop-blur-md hidden md:flex"
+        >
+          <ChevronRight size={20} />
+        </button>
 
-        {/* Dynamic Showcase & Stepper */}
-        <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch mb-12">
-          
-          {/* Showcase Screen */}
-          <div ref={showcaseRef} className="lg:col-span-8 relative aspect-[16/10] md:aspect-[16/9] bg-white/[0.02] border border-white/[0.08] backdrop-blur-md rounded-2xl overflow-hidden shadow-2xl flex items-center justify-center">
-            {/* Soft background glow */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#050B14] via-transparent to-transparent z-10 pointer-events-none"></div>
-            
-            <img 
-              src={images[activeTab].src} 
-              alt={images[activeTab].title}
-              className="gallery-showcase-img w-full h-full object-cover transition-all duration-300"
-            />
-            
-            {/* Image Overlay Label */}
-            <div className="absolute bottom-6 left-6 right-6 z-20 bg-[#050B14]/70 backdrop-blur-md border border-white/[0.06] p-5 rounded-xl max-w-md">
-              <span className="text-[#D4AF37] text-[9px] font-bold tracking-[0.25em] block mb-1 uppercase">SCENE 0{activeTab + 1}</span>
-              <h3 className="font-serif text-base md:text-lg font-bold tracking-wide mb-1.5">{images[activeTab].title}</h3>
-              <p className="text-[11px] text-white/70 leading-relaxed font-medium">{images[activeTab].desc}</p>
-            </div>
-          </div>
-
-          {/* Large description / specs list on side */}
-          <div className="lg:col-span-4 flex flex-col justify-between p-8 bg-white/[0.02] border border-white/[0.07] backdrop-blur-xl rounded-2xl">
-            <div className="space-y-6">
-              <span className="text-[#D4AF37] tracking-[0.2em] text-[10px] font-bold uppercase block">BOTTLE ARCHITECTURE</span>
-              <h4 className="font-serif text-2xl font-bold tracking-wide">DESIGN DETAILS</h4>
-              <p className="text-xs text-white/70 leading-relaxed font-medium">
-                VÖKKA Thai Aqua features a bespoke 100ml heavy glass formulation. Designed in France, the custom-knurled gold screw cap and heavy-base flacon reflect the luxury juice inside.
-              </p>
-              
-              <div className="space-y-4 pt-4 border-t border-white/[0.06]">
-                <div className="flex justify-between items-center text-xs">
-                  <span className="text-white/50 font-medium">Bottle Glass</span>
-                  <span className="text-[#F5E6C8] font-bold">Ultra-Clear Heavy-Base</span>
-                </div>
-                <div className="flex justify-between items-center text-xs">
-                  <span className="text-white/50 font-medium">Atomizer Spray</span>
-                  <span className="text-[#F5E6C8] font-bold">Micro-Mist Dispenser</span>
-                </div>
-                <div className="flex justify-between items-center text-xs">
-                  <span className="text-white/50 font-medium">Cap Texture</span>
-                  <span className="text-[#F5E6C8] font-bold">Knurled Luxury Gold</span>
-                </div>
-                <div className="flex justify-between items-center text-xs">
-                  <span className="text-white/50 font-medium">Formulation</span>
-                  <span className="text-[#F5E6C8] font-bold">Concentrated EDP (Unisex)</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-8 pt-6 border-t border-white/[0.06] flex items-center justify-between text-xs text-white/50">
-              <span>* Matches original product dimensions</span>
-              <span className="text-[#D4AF37] font-bold">100ml e 3.4 fl.oz</span>
-            </div>
-          </div>
-
-        </div>
-
-        {/* Thumbnail Selector list */}
-        <div ref={thumbnailsRef} className="w-full flex items-center justify-center gap-4 flex-wrap">
+        {/* Scroll Container */}
+        <div 
+          ref={scrollContainerRef}
+          className="flex overflow-x-auto gap-6 snap-x snap-mandatory scrollbar-none w-full py-4 px-4 md:px-12 scroll-smooth"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
           {images.map((img, i) => (
-            <button
-              key={i}
-              onClick={() => handleTabChange(i)}
-              className={`group relative w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden border transition-all duration-300 ${
-                activeTab === i 
-                  ? 'border-[#D4AF37] scale-105 shadow-[0_0_15px_rgba(212,175,55,0.25)]' 
-                  : 'border-white/10 hover:border-white/40'
-              }`}
+            <div 
+              key={i} 
+              className="flex-shrink-0 w-[85vw] md:w-[60vw] lg:w-[48vw] snap-center aspect-[16/10] bg-white/[0.01] border border-white/[0.07] rounded-2xl overflow-hidden shadow-2xl relative group"
             >
               <img 
                 src={img.src} 
-                alt={img.title} 
-                className="w-full h-full object-cover group-hover:scale-105 transition-all duration-300"
+                alt={`Vokka Thai Aqua scene ${i+1}`}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              <div className={`absolute inset-0 bg-[#050B14]/40 group-hover:opacity-0 transition-opacity duration-300 ${
-                activeTab === i ? 'opacity-0' : 'opacity-100'
-              }`}></div>
-            </button>
+              
+              {/* Glassmorphic Scene Tab on top of image */}
+              <div className="absolute top-4 left-4 z-20 bg-white/[0.08] backdrop-blur-md border border-white/[0.15] px-4 py-2 rounded-full shadow-[0_4px_30px_rgba(0,0,0,0.2)]">
+                <span className="text-[#D4AF37] text-[10px] tracking-[0.25em] font-extrabold uppercase">
+                  {img.label}
+                </span>
+              </div>
+            </div>
           ))}
         </div>
-
       </div>
+      
     </section>
   );
 };
