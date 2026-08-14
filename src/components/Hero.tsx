@@ -76,11 +76,11 @@ const Hero: React.FC<HeroProps> = ({ onBuyClick }) => {
         </p>
 
         {/* Price Badge */}
-        <div className="py-2 px-5 bg-[#050B14]/40 border border-[#D4AF37]/35 backdrop-blur-md rounded-sm inline-flex flex-wrap items-center justify-center gap-2.5">
-          <span className="text-[11px] font-semibold tracking-wider text-[#F5E6C8] uppercase">Special Direct Launch:</span>
-          <span className="text-base font-bold text-[#D4AF37] font-serif">₹600</span>
-          <span className="text-[10px] text-white/40 line-through">MRP ₹2,999</span>
-          <span className="text-[10px] bg-[#D4AF37]/20 text-[#D4AF37] px-1.5 py-0.5 rounded font-bold">80% Off</span>
+        <div className="py-2 px-5 bg-[#050B14]/60 border border-[#D4AF37]/50 backdrop-blur-md rounded-sm inline-flex flex-wrap items-center justify-center gap-2.5">
+          <span className="text-[11px] font-bold tracking-wider text-[#F5E6C8] uppercase">Special Direct Launch:</span>
+          <span className="text-base font-extrabold text-[#F5E6C8] font-serif">₹600</span>
+          <span className="text-[10px] text-white/60 line-through">MRP ₹2,999</span>
+          <span className="text-[10px] bg-[#D4AF37]/30 text-[#F5E6C8] px-1.5 py-0.5 rounded font-bold">80% Off</span>
         </div>
 
         {/* CTAs */}
@@ -94,26 +94,26 @@ const Hero: React.FC<HeroProps> = ({ onBuyClick }) => {
           </button>
           <button
             onClick={scrollToNotes}
-            className="w-full sm:w-auto border border-white/20 hover:border-[#D4AF37] transition-all duration-300 py-4 px-10 tracking-[0.15em] text-xs font-bold rounded-sm text-white"
+            className="w-full sm:w-auto border border-white/30 hover:border-[#D4AF37] transition-all duration-300 py-4 px-10 tracking-[0.15em] text-xs font-bold rounded-sm text-white"
           >
             EXPLORE NOTES ↓
           </button>
         </div>
 
         {/* Trust Pills */}
-        <div className="flex flex-wrap justify-center gap-3 text-[10px] tracking-wider text-white/70">
-          <div className="flex items-center gap-1.5 py-1.5 px-3 bg-[#050B14]/40 border border-white/[0.05] rounded-full backdrop-blur-md">
+        <div className="flex flex-wrap justify-center gap-3 text-[10px] tracking-wider text-white">
+          <div className="flex items-center gap-1.5 py-1.5 px-3 bg-[#050B14]/60 border border-white/[0.1] rounded-full backdrop-blur-md">
             <Star size={11} className="text-[#D4AF37]" fill="#D4AF37" />
-            <span className="font-semibold text-white">4.2★ Rated</span>
-            <span className="text-white/40">(21,000+ Reviews)</span>
+            <span className="font-bold text-[#F5E6C8]">4.2★ Rated</span>
+            <span className="text-white/80 font-bold">(21,000+ Reviews)</span>
           </div>
-          <div className="flex items-center gap-1.5 py-1.5 px-3 bg-[#050B14]/40 border border-white/[0.05] rounded-full backdrop-blur-md">
+          <div className="flex items-center gap-1.5 py-1.5 px-3 bg-[#050B14]/60 border border-white/[0.1] rounded-full backdrop-blur-md">
             <Heart size={11} className="text-[#D4AF37]" fill="#D4AF37" />
-            <span className="font-semibold text-white">100% Unisex EDP</span>
+            <span className="font-bold text-[#F5E6C8]">100% Unisex EDP</span>
           </div>
-          <div className="flex items-center gap-1.5 py-1.5 px-3 bg-[#050B14]/40 border border-white/[0.05] rounded-full backdrop-blur-md">
+          <div className="flex items-center gap-1.5 py-1.5 px-3 bg-[#050B14]/60 border border-white/[0.1] rounded-full backdrop-blur-md">
             <ShieldCheck size={11} className="text-[#D4AF37]" />
-            <span className="font-semibold text-white">Pay on Delivery</span>
+            <span className="font-bold text-[#F5E6C8]">Pay on Delivery</span>
           </div>
         </div>
       </div>

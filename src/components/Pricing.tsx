@@ -90,7 +90,7 @@ const Pricing: React.FC<PricingProps> = ({ onBuyClick }) => {
           <p className="text-[#D4AF37] tracking-[0.2em] text-[10px] md:text-xs font-bold uppercase mb-4">DIRECT LAUNCH PRICING</p>
           <h2 ref={titleRef} className="invisible font-serif text-3xl md:text-5xl font-bold tracking-wide text-white text-shadow-premium">CHOOSE YOUR QUANTITY</h2>
           <div className="w-16 h-[1px] bg-[#D4AF37] mx-auto my-6"></div>
-          <p className="text-white/80 text-sm leading-relaxed font-semibold">
+          <p className="text-white text-sm leading-relaxed font-bold">
             VOKKA Thai Aqua 100 ml Unisex Luxury Long Lasting Aqua Perfume. Secure your bottle directly from our launch batch with Cash on Delivery options.
           </p>
         </div>
@@ -117,25 +117,25 @@ const Pricing: React.FC<PricingProps> = ({ onBuyClick }) => {
                 <div className="flex justify-between items-center mb-3">
                   <h3 className="text-lg font-serif font-bold tracking-wider text-white text-shadow-premium">{plan.name}</h3>
                   {plan.discount && (
-                    <span className="text-[9px] font-bold text-[#D4AF37] bg-[#D4AF37]/10 border border-[#D4AF37]/25 px-2 py-0.5 rounded">
+                    <span className="text-[9px] font-bold text-[#D4AF37] bg-[#D4AF37]/15 border border-[#D4AF37]/35 px-2 py-0.5 rounded">
                       {plan.discount}
                     </span>
                   )}
                 </div>
-                <p className="text-white/70 text-xs leading-relaxed h-12 font-semibold">{plan.description}</p>
+                <p className="text-white/90 text-xs leading-relaxed h-12 font-bold">{plan.description}</p>
               </div>
               
               <div className="mb-6 flex items-baseline gap-2">
-                <span className="text-4xl font-serif font-bold text-[#D4AF37]">{plan.price}</span>
-                <span className="text-xs text-white/40 line-through">{plan.mrp}</span>
+                <span className="text-4xl font-serif font-extrabold text-[#F5E6C8] text-shadow-premium">{plan.price}</span>
+                <span className="text-xs text-white/60 line-through font-semibold">{plan.mrp}</span>
               </div>
               
               <div className="flex-grow">
                 <div className="space-y-4 mb-8">
                   {plan.features.map((feature, i) => (
-                    <div key={i} className="flex items-start gap-3 text-xs text-white/90">
+                    <div key={i} className="flex items-start gap-3 text-xs text-white">
                       <Check size={14} className="mt-0.5 shrink-0 text-[#D4AF37]" />
-                      <span className="font-semibold">{feature}</span>
+                      <span className="font-bold">{feature}</span>
                     </div>
                   ))}
                 </div>

@@ -79,7 +79,7 @@ Please confirm my order.`;
             <ShoppingCart size={18} className="text-[#D4AF37]" />
             <h2 className="font-serif text-lg font-bold tracking-widest text-[#F5E6C8]">ORDER DETAILS</h2>
           </div>
-          <button onClick={onClose} className="text-white/50 hover:text-white transition-colors">
+          <button onClick={onClose} className="text-white/75 hover:text-white transition-colors">
             <X size={20} />
           </button>
         </div>
@@ -92,13 +92,13 @@ Please confirm my order.`;
             <div className="flex justify-between items-start">
               <div>
                 <h3 className="font-serif text-sm font-bold text-white tracking-wider">VÖKKA Thai Aqua EDP (100ml)</h3>
-                <p className="text-[10px] text-white/40 tracking-widest uppercase mt-1">Premium Unisex Formulation</p>
+                <p className="text-[10px] text-white/70 tracking-widest uppercase mt-1">Premium Unisex Formulation</p>
               </div>
-              <span className="text-[#D4AF37] text-lg font-serif font-bold">₹{totalPrice}</span>
+              <span className="text-[#F5E6C8] text-lg font-serif font-extrabold">₹{totalPrice}</span>
             </div>
             
             <div className="flex items-center justify-between pt-3 border-t border-white/[0.06]">
-              <span className="text-xs text-white/60 tracking-wider">Select Bottles:</span>
+              <span className="text-xs text-white/90 tracking-wider font-bold">Select Bottles:</span>
               <div className="flex items-center gap-2">
                 {[1, 2, 3].map((qty) => (
                   <button
@@ -107,8 +107,8 @@ Please confirm my order.`;
                     onClick={() => setQuantity(qty)}
                     className={`w-10 h-10 rounded-sm font-serif text-xs font-bold transition-all ${
                       quantity === qty
-                        ? 'bg-[#D4AF37] text-[#050B14] shadow-[0_0_15px_rgba(212,175,55,0.2)]'
-                        : 'bg-white/5 border border-white/10 text-white hover:bg-white/10'
+                        ? 'bg-[#D4AF37] text-[#050B14] shadow-[0_0_15px_rgba(212,175,55,0.25)]'
+                        : 'bg-white/10 border border-white/20 text-white hover:bg-white/25'
                     }`}
                   >
                     {qty}
@@ -126,7 +126,7 @@ Please confirm my order.`;
               { label: 'Delivery Address', name: 'address', placeholder: 'House/Flat No, Street Name, Landmark', type: 'text' },
             ].map((field) => (
               <div key={field.name}>
-                <label className="text-[10px] tracking-widest text-white/50 uppercase block mb-1.5 font-bold">{field.label} *</label>
+                <label className="text-[10px] tracking-widest text-[#F5E6C8] uppercase block mb-1.5 font-bold">{field.label} *</label>
                 <input 
                   type={field.type}
                   name={field.name}
@@ -135,7 +135,7 @@ Please confirm my order.`;
                   maxLength={field.maxLength}
                   value={(formData as any)[field.name]}
                   onChange={handleChange}
-                  className="w-full bg-white/[0.03] border border-white/[0.1] rounded-sm px-4 py-3 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-[#D4AF37] transition-colors"
+                  className="w-full bg-white/[0.03] border border-white/[0.1] rounded-sm px-4 py-3 text-sm text-white placeholder:text-white/35 focus:outline-none focus:border-[#D4AF37] transition-colors"
                 />
               </div>
             ))}
@@ -146,7 +146,7 @@ Please confirm my order.`;
                 { label: 'State', name: 'state', placeholder: 'State' },
               ].map((field) => (
                 <div key={field.name}>
-                  <label className="text-[10px] tracking-widest text-white/50 uppercase block mb-1.5 font-bold">{field.label} *</label>
+                  <label className="text-[10px] tracking-widest text-[#F5E6C8] uppercase block mb-1.5 font-bold">{field.label} *</label>
                   <input 
                     type="text"
                     name={field.name}
@@ -154,7 +154,7 @@ Please confirm my order.`;
                     required
                     value={(formData as any)[field.name]}
                     onChange={handleChange}
-                    className="w-full bg-white/[0.03] border border-white/[0.1] rounded-sm px-4 py-3 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-[#D4AF37] transition-colors"
+                    className="w-full bg-white/[0.03] border border-white/[0.1] rounded-sm px-4 py-3 text-sm text-white placeholder:text-white/35 focus:outline-none focus:border-[#D4AF37] transition-colors"
                   />
                 </div>
               ))}
@@ -162,7 +162,7 @@ Please confirm my order.`;
             
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="text-[10px] tracking-widest text-white/50 uppercase block mb-1.5 font-bold">Pincode *</label>
+                <label className="text-[10px] tracking-widest text-[#F5E6C8] uppercase block mb-1.5 font-bold">Pincode *</label>
                 <input 
                   type="text"
                   name="pincode"
@@ -171,12 +171,12 @@ Please confirm my order.`;
                   maxLength={6}
                   value={formData.pincode}
                   onChange={handleChange}
-                  className="w-full bg-white/[0.03] border border-white/[0.1] rounded-sm px-4 py-3 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-[#D4AF37] transition-colors"
+                  className="w-full bg-white/[0.03] border border-white/[0.1] rounded-sm px-4 py-3 text-sm text-white placeholder:text-white/35 focus:outline-none focus:border-[#D4AF37] transition-colors"
                 />
               </div>
               
               <div>
-                <label className="text-[10px] tracking-widest text-white/50 uppercase block mb-1.5 font-bold">Payment Method *</label>
+                <label className="text-[10px] tracking-widest text-[#F5E6C8] uppercase block mb-1.5 font-bold">Payment Method *</label>
                 <select 
                   name="paymentPreference"
                   value={formData.paymentPreference}
@@ -200,9 +200,9 @@ Please confirm my order.`;
           >
             CONFIRM ORDER VIA WHATSAPP
           </button>
-          <div className="flex items-center justify-center gap-1.5 text-[9px] text-white/40 tracking-wider">
+          <div className="flex items-center justify-center gap-1.5 text-[9px] text-white/70 tracking-wider">
             <ShieldCheck size={11} className="text-[#D4AF37]" />
-            <span>SECURE DIRECT ORDER • FAST DESPATCH</span>
+            <span className="font-semibold text-white/80">SECURE DIRECT ORDER • FAST DESPATCH</span>
           </div>
         </div>
       </div>
